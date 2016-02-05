@@ -32,6 +32,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'better_errors'
