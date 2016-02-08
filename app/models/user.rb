@@ -3,6 +3,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
          
   def is_admin?
-    self.email && ENV['ADMIN_EMAILS'].to_s.include?(self.email)
+    self.admin
   end
 end
