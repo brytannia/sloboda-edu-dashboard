@@ -9,6 +9,9 @@ html
   body
     = notice
     = alert
+    .admin-nav
+      - if current_user.try(:is_admin)
+        = link_to 'Admin', admin_dashboard_path
     .user-nav
       - if user_signed_in?
         p Signed in as #{current_user.first_name + ' ' + current_user.last_name}
