@@ -6,11 +6,13 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'
+    = csrf_meta_tags
   body
     = notice
     = alert
     .admin-nav
-      - if current_user.try(:is_admin)
+      - if current_user.try(:is_admin?)
         = link_to 'Admin', admin_dashboard_path
     .user-nav
       - if user_signed_in?
