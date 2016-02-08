@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-  	temp = [:first_name, :last_name, :email, :password, :password_confirmation]
-  	temp.each { |p| devise_parameter_sanitizer.for(:sign_up) << p }
+    temp = [:first_name, :last_name, :email, :password, :password_confirmation]
+    temp.each { |p| devise_parameter_sanitizer.for(:sign_up) << p }
   end
 end
