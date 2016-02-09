@@ -29,6 +29,7 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'pry'
+  gem 'mailcatcher', '~> 0.6.1'
 end
 
 group :development do
@@ -40,7 +41,6 @@ group :development do
 end
 
 gem 'devise'
-gem 'mailcatcher', '~> 0.6.1'
 gem 'slim'
 gem 'html2slim'
 gem 'activeadmin', github: 'activeadmin'
