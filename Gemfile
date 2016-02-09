@@ -43,3 +43,4 @@ end
 gem 'devise'
 gem 'slim'
 gem 'html2slim'
+gem 'activeadmin', github: 'activeadmin'
