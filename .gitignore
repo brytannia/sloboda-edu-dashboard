@@ -20,7 +20,3 @@
 .ruby-gemset
 
 config/database.yml
-config/secrets.yml
-
-git-ssh
-git-ssh.pub
