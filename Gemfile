@@ -39,3 +39,7 @@ group :development do
   gem 'rubocop', require: false
 end
 
+gem 'devise'
+gem 'mailcatcher', '~> 0.6.1'
+gem 'slim'
+gem 'html2slim'
