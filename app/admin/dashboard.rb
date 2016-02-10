@@ -21,5 +21,14 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
     end
+
+    section "This month" do
+    table_for Event.all.where('datetime > ? and datetime < ?', DateTime.now.to_date, 1.month.from_now) do |t|
+      t.column("Subject") { |event| event.subject }
+      t.column("Date") { |event| event.datetime.strftime("%B %d, %Y") }
+      t.column("Time") { |event| event.datetime.strftime("%H:%M") }
+      t.column("Location") { |event| event.location.name }
+      end
+    end
   end
 end
