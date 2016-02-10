@@ -20,4 +20,4 @@
 .ruby-gemset
 
 config/database.yml
-app/views/layouts/*fuse_hidden*
+*fuse_hidden*
