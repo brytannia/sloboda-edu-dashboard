@@ -12,7 +12,7 @@ html
     = notice
     = alert
     .admin-nav
-      - if current_user.try(:is_admin?)
+      - if current_user.try(:admin?)
         = link_to 'Admin', admin_dashboard_path
     .user-nav
       - if user_signed_in?

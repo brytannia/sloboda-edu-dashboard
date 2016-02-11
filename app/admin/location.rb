@@ -9,7 +9,7 @@ ActiveAdmin.register Location do
     actions
   end
   form do |f|
-    f.inputs "Location" do
+    f.inputs 'Location' do
       f.input :name
       f.input :address
     end
