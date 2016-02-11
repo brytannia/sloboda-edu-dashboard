@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :debug
   protect_from_forgery with: :exception
 
   protected
@@ -12,9 +11,5 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin_user!
     redirect_to new_user_session_path unless current_user.try(:admin?)
-  end
-
-  def debug
-    # binding.pry
   end
 end
