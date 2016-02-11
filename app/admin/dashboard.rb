@@ -21,7 +21,7 @@ ActiveAdmin.register_page 'Dashboard' do
     end
 
     section 'This month' do
-      table_for Event.all.where('datetime > ? and datetime < ?',
+      table_for Event.where('datetime > ? and datetime < ?',
                                 DateTime.now.to_date, 1.month.from_now) do |t|
         t.column('Subject') { |event| event.subject }
         t.column('Date') { |event| event.datetime.strftime('%B %d, %Y') }

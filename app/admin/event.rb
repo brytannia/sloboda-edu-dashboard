@@ -58,8 +58,9 @@ ActiveAdmin.register Event do
 
   scope :all, default: true
   scope :today do |events|
-    events.where('? < datetime and datetime < ?',
-                 DateTime.now.to_date - 1.days, DateTime.now.to_date + 1.days)
+    events.where('datetime between ? and ?',
+                 DateTime.now.beginning_of_day,
+                 DateTime.now.beginning_of_day + 1.days)
   end
   scope :this_week do |events|
     events.where('datetime > ? and datetime < ?',
