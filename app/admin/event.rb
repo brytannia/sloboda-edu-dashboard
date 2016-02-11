@@ -63,10 +63,10 @@ ActiveAdmin.register Event do
                  DateTime.now.beginning_of_day + 1.days)
   end
   scope :this_week do |events|
-    events.where('datetime > ? and datetime < ?',
-                 DateTime.now.to_date, 1.week.from_now)
+    events.where('datetime between ? and ?',
+                 DateTime.now.beginning_of_day, 1.week.from_now)
   end
   scope :past do |events|
-    events.where('datetime < ?', DateTime.now.to_date)
+    events.where('datetime < ?', DateTime.now.beginning_of_day)
   end
 end
