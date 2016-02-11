@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id          :integer          not null, primary key
+#  subject     :string
+#  confirmed   :boolean
+#  location_id :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  datetime    :datetime
+#
+
 class Event < ActiveRecord::Base
   has_many :user_events
   has_many :users, through: :user_events

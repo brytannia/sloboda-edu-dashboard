@@ -26,8 +26,8 @@ ActiveAdmin.register Event do
     attributes_table do
       row :subject
       row :location
-      table_for event.users.each do
-        column do |user|
+      event.users.each do
+        row do |user|
           link_to user.email, [:admin, user]
         end
       end
@@ -42,6 +42,13 @@ ActiveAdmin.register Event do
       f.input :location
       f.input :confirmed
 
+      f.has_many :users do |ff|
+        ff.input :email,
+                 as: :select,
+                 multiple: true,
+                 size: 5,
+                 collection: User.all.map { |u| [u.email, u.id] }
+      end
       ##########
       # f.input :users, as: :select, multiple: true,
       # collection: User.all.map {|q| [q.email, q]}

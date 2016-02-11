@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id          :integer          not null, primary key
+#  subject     :string
+#  confirmed   :boolean
+#  location_id :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  datetime    :datetime
+#
+
 class EventsController < ApplicationController
   before_action :check_rights
 

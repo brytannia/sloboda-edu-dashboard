@@ -18,6 +18,8 @@ table
 			td
 				- e.users.each do |s|
 					. #{s.first_name}
+					- if s.avatar?
+						= image_tag s.avatar.url(:thumb)
 			td 
 				- if e.location
 					. #{e.location.try(:name) + ', ' + e.location.try(:address)}					
