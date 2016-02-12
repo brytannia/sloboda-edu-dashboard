@@ -1,0 +1,22 @@
+= form_for(@user) do |f|
+    br
+    h2 Edit profile
+    br
+    .field
+      = f.label :first_name
+      br
+      = f.text_field :first_name, autofocus: true      
+    .field
+      = f.label :last_name
+      br
+      = f.text_field :last_name  
+    .field
+      = f.label :email
+      br
+      = f.email_field :email
+    .field
+      = f.label :avatar
+      br
+      = f.file_field :avatar
+    .actions
+      = f.submit 'Save'

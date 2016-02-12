@@ -36,8 +36,8 @@ ActiveAdmin.register Event do
     attributes_table do
       row :subject
       row :location
-      table_for event.users.each do
-        column do |user|
+      event.users.each do
+        row do |user|
           link_to user.email, [:admin, user]
         end
       end
@@ -51,7 +51,6 @@ ActiveAdmin.register Event do
       f.input :datetime, as: :datetime_picker
       f.input :location
       f.input :confirmed
-
       f.input :users,
               collection: User.all.map { |user| [user.email, user.id] },
               as: :select, multiple: true
