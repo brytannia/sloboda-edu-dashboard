@@ -1,6 +1,17 @@
 ActiveAdmin.register Event do
   permit_params :subject, :datetime, :confirmed, :location_id,
                 :user_events, :users
+  before_filter :set_users, only: [:update]
+
+  controller do
+    def set_users
+      @event = Event.find(params[:id])
+      @event.users = []
+      params[:event][:user_ids].each do |id|
+        @event.users << User.find(id) if id != ''
+      end
+    end
+  end
 
   index do
     selectable_column
@@ -42,6 +53,9 @@ ActiveAdmin.register Event do
       f.input :location
       f.input :confirmed
 
+      f.input :users,
+              collection: User.all.map { |user| [user.email, user.id] },
+              as: :select, multiple: true
       ##########
       # f.input :users, as: :select, multiple: true,
       # collection: User.all.map {|q| [q.email, q]}
