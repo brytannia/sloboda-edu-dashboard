@@ -1,0 +1,10 @@
+h1 My profile
+= image_tag @user.avatar.url(:thumb)
+br
+strong Name: 
+= @user.first_name + ' ' + @user.last_name
+br
+strong E-mail: 
+= @user.email
+br
+= link_to 'Edit profile', edit_user_path(current_user)

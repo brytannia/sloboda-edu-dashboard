@@ -11,12 +11,16 @@
 #  datetime    :datetime
 #
 
-class Event < ActiveRecord::Base
-  has_many :user_events
-  has_many :users, through: :user_events
-  belongs_to :location
+class EventsController < ApplicationController
+  before_action :check_rights
 
-  accepts_nested_attributes_for :users
-  accepts_nested_attributes_for :user_events
-  validates_presence_of :subject
+  def index
+    @events = Event.order(:updated_at)
+  end
+
+  private
+
+  def check_rights
+    redirect_to new_user_session_path unless user_signed_in?
+  end
 end

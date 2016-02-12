@@ -14,6 +14,7 @@ ActiveAdmin.register User do
     f.inputs 'User' do
       f.input :first_name
       f.input :last_name
+      f.input :avatar
       f.input :speaker
       f.input :email
       f.input :password
