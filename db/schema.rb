@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160211135359) do
     t.string   "subject"
     t.boolean  "confirmed"
     t.integer  "location_id"
+    t.datetime "datetime"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.datetime "datetime"

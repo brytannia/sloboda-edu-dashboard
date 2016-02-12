@@ -1,6 +1,17 @@
 ActiveAdmin.register Event do
   permit_params :subject, :datetime, :confirmed, :location_id,
                 :user_events, :users
+  before_filter :set_users, only: [:update]
+
+  controller do
+    def set_users
+      @event = Event.find(params[:id])
+      @event.users = []
+      params[:event][:user_ids].each do |id|
+        @event.users << User.find(id) unless id == ''
+      end
+    end
+  end
 
   index do
     selectable_column
@@ -11,7 +22,6 @@ ActiveAdmin.register Event do
     column :location
     column :created_at
 
-    ##########
     column :speakers do |event|
       table_for event.users.each do
         column do |user|
@@ -41,22 +51,9 @@ ActiveAdmin.register Event do
       f.input :datetime, as: :datetime_picker
       f.input :location
       f.input :confirmed
-
-      f.has_many :users do |ff|
-        ff.input :email,
-                 as: :select,
-                 multiple: true,
-                 size: 5,
-                 collection: User.all.map { |u| [u.email, u.id] }
-      end
-      ##########
-      # f.input :users, as: :select, multiple: true,
-      # collection: User.all.map {|q| [q.email, q]}
-
-      # f.input :users,
-      # collection: User.all.map{ |user| [user.email, user.id] },
-      # multiple: 'multiple'
-      # f.input :users, as: :check_boxes
+      f.input :users,
+              collection: User.all.map { |user| [user.email, user.id] },
+              as: :select, multiple: true
     end
     f.actions
   end
@@ -65,14 +62,13 @@ ActiveAdmin.register Event do
 
   scope :all, default: true
   scope :today do |events|
-    events.where('? < datetime and datetime < ?',
-                 DateTime.now.to_date - 1.days, DateTime.now.to_date + 1.days)
+    events.where(datetime: DateTime.now.beginning_of_day..
+                 DateTime.now.end_of_day)
   end
   scope :this_week do |events|
-    events.where('datetime > ? and datetime < ?',
-                 DateTime.now.to_date, 1.week.from_now)
+    events.where(datetime: DateTime.now.beginning_of_day...1.week.from_now)
   end
   scope :past do |events|
-    events.where('datetime < ?', DateTime.now.to_date)
+    events.where('datetime < ?', DateTime.now)
   end
 end
