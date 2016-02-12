@@ -8,7 +8,7 @@ ActiveAdmin.register Event do
       @event = Event.find(params[:id])
       @event.users = []
       params[:event][:user_ids].each do |id|
-        @event.users << User.find(id) if id != ''
+        @event.users << User.find(id) unless id == ''
       end
     end
   end
@@ -22,7 +22,6 @@ ActiveAdmin.register Event do
     column :location
     column :created_at
 
-    ##########
     column :speakers do |event|
       table_for event.users.each do
         column do |user|
@@ -56,14 +55,6 @@ ActiveAdmin.register Event do
       f.input :users,
               collection: User.all.map { |user| [user.email, user.id] },
               as: :select, multiple: true
-      ##########
-      # f.input :users, as: :select, multiple: true,
-      # collection: User.all.map {|q| [q.email, q]}
-
-      # f.input :users,
-      # collection: User.all.map{ |user| [user.email, user.id] },
-      # multiple: 'multiple'
-      # f.input :users, as: :check_boxes
     end
     f.actions
   end
@@ -72,15 +63,13 @@ ActiveAdmin.register Event do
 
   scope :all, default: true
   scope :today do |events|
-    events.where('datetime between ? and ?',
-                 DateTime.now.beginning_of_day,
-                 DateTime.now.beginning_of_day + 1.days)
+    events.where(datetime: DateTime.now.beginning_of_day..
+                 DateTime.now.end_of_day)
   end
   scope :this_week do |events|
-    events.where('datetime between ? and ?',
-                 DateTime.now.beginning_of_day, 1.week.from_now)
+    events.where(datetime: DateTime.now.beginning_of_day...1.week.from_now)
   end
   scope :past do |events|
-    events.where('datetime < ?', DateTime.now.beginning_of_day)
+    events.where('datetime < ?', DateTime.now)
   end
 end
