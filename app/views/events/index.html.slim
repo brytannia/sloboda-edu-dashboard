@@ -1,27 +1,27 @@
 h1 Sloboda Edu Dashboard
 table
-	tr
-		th Date
-		th Time
-		th Subject
-		th Speakers
-		th Place
-		- if current_user.try(:admin?)
-			th Confirmed
-	- @events.each do |e|
-		- if !e.confirmed && !current_user.try(:admin?)
-			- next
-		tr
-			td #{e.datetime.try(:strftime, '%B %d, %Y')}
-			td #{e.datetime.try(:strftime, '%H:%M')}
-			td #{e.subject}
-			td
-				- e.users.each do |s|
-					. #{s.first_name}
-					- if s.avatar?
-						= image_tag s.avatar.url(:thumb)
-			td 
-				- if e.location
-					. #{e.location.try(:name) + ', ' + e.location.try(:address)}					
-			- if current_user.try(:admin?)
-				td #{e.confirmed}
+  tr
+    th Date
+    th Time
+    th Subject
+    th Speakers
+    th Place
+    - if current_user.try(:admin?)
+      th Confirmed
+  - @events.each do |e|
+    - if !e.confirmed && !current_user.try(:admin?)
+      - next
+    tr
+      td #{e.datetime.try(:strftime, '%B %d, %Y')}
+      td #{e.datetime.try(:strftime, '%H:%M')}
+      td #{e.subject}
+      td
+        - e.users.each do |s|
+          . #{s.first_name}
+          - if s.avatar?
+            = image_tag s.avatar.url(:thumb)
+      td 
+        - if e.location
+          . #{e.location.try(:name) + ', ' + e.location.try(:address)}          
+      - if current_user.try(:admin?)
+        td #{e.confirmed}
