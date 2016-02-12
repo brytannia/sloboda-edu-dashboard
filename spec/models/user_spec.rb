@@ -20,5 +20,28 @@
 #  avatar_updated_at      :datetime
 #
 
-module UsersHelper
+require 'spec_helper'
+
+describe User do
+  %i(first_name last_name email password password_confirmation).each do |f|
+    it { expect(subject).to validate_presence_of f }
+  end
+
+  it { expect(subject).to have_many(:events).through(:user_events) }
+
+  # fix email case-sensitively uniqueness
+  # subject { FactoryGirl.build(:user) }
+  # it { expect(subject).to validate_uniqueness_of(:email) }
+
+  describe '#admin?' do
+    subject { user.admin? }
+    context 'with admin' do
+      let(:user) { build_stubbed :user, :admin }
+      it { expect(subject).to be true }
+    end
+    context 'without admin' do
+      let(:user) { build_stubbed :user, :reader }
+      it { expect(subject).to be false }
+    end
+  end
 end

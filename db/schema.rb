@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210132633) do
+ActiveRecord::Schema.define(version: 20160208172158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 20160210132633) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "events", force: :cascade do |t|
+    t.datetime "datetime"
     t.string   "subject"
     t.boolean  "confirmed"
     t.integer  "location_id"
-    t.datetime "datetime"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
