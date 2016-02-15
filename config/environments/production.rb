@@ -79,7 +79,7 @@ Rails.application.configure do
 
   config.assets.precompile +=
     ['active_admin.js', 'active_admin.css', 'active_admin/print.css']
-  config.serve_static_assets = true
+  config.serve_static_files = true
 
   config.assets.precompile +=
     %w( #{Rails.root}/vendor/assets/stylesheets/active_admin.css.scss)
