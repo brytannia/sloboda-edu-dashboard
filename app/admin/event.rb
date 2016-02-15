@@ -34,10 +34,13 @@ ActiveAdmin.register Event do
 
   show do
     attributes_table do
+      row :id
       row :subject
       row :location
-      event.users.each do
-        row do |user|
+      row :confirmed
+      row :datetime
+      table_for event.users.each do
+        column do |user|
           link_to user.email, [:admin, user]
         end
       end

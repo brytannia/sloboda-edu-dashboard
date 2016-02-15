@@ -22,7 +22,8 @@ body, *, h1 {
 
 div.top-bar {
 	padding: 15px;
-	color: #fff;
+	color: #ddd;
+	font-size: 18px;
 }
 
 div.top-bar, .menu li {
@@ -30,7 +31,7 @@ div.top-bar, .menu li {
 }
 
 div.top-bar a {
-	color: #eee;
+	color: #ddd;
 	font-size: 1.1em;
 }
 
@@ -38,13 +39,26 @@ div.top-bar a:hover {
 	color: #fff;
 }
 
-.month {
+.month, h2 {
   text-align: center;
   font-size: 46px;
   font-weight: 300;
   border-bottom: 1px solid #999;
   color: #2C3E50;
   padding: 20px;
+}
+
+h2 {
+	border: 0;
+}
+
+.field label, .profile {
+	font-size: 20px;
+	color: #444;
+}
+
+.profile {
+	line-height: 42px;
 }
 
 .event {
@@ -104,15 +118,22 @@ div.top-bar a:hover {
 }
 
 .top-bar-right {
-	padding-top: 10px;
+	padding-top: 8px;
+}
+
+.adm {
+	float: right;
+  padding: 0 10px 20px 0;
+  font-weight: 600;
+  font-size: 24px;
 }
 
 .conf {
-	float: right;
-  padding: 0 20px;
-  color: #E84855;
-  font-weight: 600;
-  font-size: 28px;
+  color: #E84855;	
+}
+
+.btn {
+	width: 100%;
 }
 
 @media all and (max-width: 720px) {

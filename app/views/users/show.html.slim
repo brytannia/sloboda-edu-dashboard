@@ -1,10 +1,12 @@
-h1 My profile
-= image_tag @user.avatar.url(:thumb)
-br
-strong Name: 
-= @user.first_name + ' ' + @user.last_name
-br
-strong E-mail: 
-= @user.email
-br
-= link_to 'Edit profile', edit_user_path(current_user)
+.row
+  h2 My profile
+  .small-5.small-offset-2.columns
+    = image_tag @user.avatar.url(:medium)
+  .small-5.columns.profile
+    strong Name: 
+    = @user.first_name + ' ' + @user.last_name
+    br
+    strong E-mail: 
+    = @user.email
+    br
+    = link_to 'Edit profile', edit_user_path(current_user)

@@ -1,4 +1,3 @@
-/ - if current_user.try(:admin?)
 - @hash.each do |k,v|
   .row.month-events
     div.month #{k}
@@ -7,8 +6,11 @@
         - next
       .event
         .row
-          - if current_user.try(:admin?) && !e.confirmed
-            .conf Not confirmed
+          - if current_user.try(:admin?)
+            .adm
+              = link_to 'Edit', edit_admin_event_path(e), class: 'button hollow'
+            - unless e.confirmed
+              .adm.conf Not confirmed
         .row.info
           .small-6.columns
             .title #{e.subject}.
