@@ -12,4 +12,136 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+
  */
+
+body, *, h1 {
+  font-family: 'Lato', sans-serif;
+}
+
+div.top-bar {
+  padding: 15px;
+  color: #ddd;
+  font-size: 18px;
+}
+
+div.top-bar, .menu li {
+  background-color: #2C3E50;
+}
+
+div.top-bar a {
+  color: #ddd;
+  font-size: 1.1em;
+}
+
+div.top-bar a:hover {
+  color: #fff;
+}
+
+.month, h2 {
+  text-align: center;
+  font-size: 46px;
+  font-weight: 300;
+  border-bottom: 1px solid #999;
+  color: #2C3E50;
+  padding: 20px;
+}
+
+h2 {
+  border: 0;
+}
+
+h2.show {
+  margin-top: 20px;
+}
+
+.field label, .profile {
+  font-size: 20px;
+  color: #444;
+}
+
+.profile {
+  line-height: 42px;
+}
+
+.event {
+  padding: 45px 5px 25px;
+  background: #2D3047;
+  color: #fff;
+}
+
+.event:last-child {
+  margin-bottom: 20px;
+}
+
+.event img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.speakers {
+  text-align: center;
+  font-size: 24px;
+  padding: 10px 0 20px 0;
+}
+
+.sp {
+  text-align: center;
+  padding: 40px 0 10px 0;
+  font-size: 32px;
+}
+
+.info {
+  text-align: center;
+  font-size: 24px;
+}
+
+.info *, .details * {
+  font-weight: 300;
+}
+
+.details {
+  text-align: left;
+}
+
+.event:nth-child(2n) {
+  background: #eee;
+  color: #333;
+}
+
+.speakers {
+  display: flex;
+  justify-content: space-around;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.top-bar-right {
+  padding-top: 8px;
+}
+
+.adm {
+  float: right;
+  padding: 0 10px 20px 0;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.conf {
+  color: #E84855; 
+}
+
+.btn {
+  width: 100%;
+}
+
+@media all and (max-width: 720px) {
+    .top-bar ul {
+      background-color: #2C3E50;
+    }
+}
