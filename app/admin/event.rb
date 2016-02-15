@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   permit_params :subject, :datetime, :confirmed, :location_id,
                 :user_events, :users
-  before_filter :set_users, only: [:update]
+  before_filter :set_users, only: [:update, :create]
 
   controller do
     def set_users
@@ -34,11 +34,8 @@ ActiveAdmin.register Event do
 
   show do
     attributes_table do
-      row :id
       row :subject
       row :location
-      row :confirmed
-      row :datetime
       table_for event.users.each do
         column do |user|
           link_to user.email, [:admin, user]
@@ -54,6 +51,7 @@ ActiveAdmin.register Event do
       f.input :datetime, as: :datetime_picker
       f.input :location
       f.input :confirmed
+
       f.input :users,
               collection: User.all.map { |user| [user.email, user.id] },
               as: :select, multiple: true

@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   before_action :check_rights
 
   def index
-    events = Event.order(:datetime)
+    events = Event.order(:datetime).where('datetime < ?', DateTime.now)
     @hash = {}
     events.each do |e|
       unless @hash.key? e.datetime.try(:strftime, '%B')
