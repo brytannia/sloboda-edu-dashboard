@@ -20,17 +20,20 @@
 #  avatar_updated_at      :datetime
 #
 
-class User < ActiveRecord::Base
-  has_many :user_events
-  has_many :events, through: :user_events
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+FactoryGirl.define do
+  factory :user do
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    password 'password'
+    password_confirmation 'password'
 
-  validates :email, uniqueness: true
-  validates_presence_of :first_name, :last_name, :email
+    trait :admin do
+      admin true
+    end
 
-  has_attached_file :avatar,
-                    styles: { medium: '300x300#', thumb: '150x150#' },
-                    default_url: '/images/:style/missing.png'
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+    trait :reader do
+      admin false
+    end
+  end
 end

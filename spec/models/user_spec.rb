@@ -20,17 +20,28 @@
 #  avatar_updated_at      :datetime
 #
 
-class User < ActiveRecord::Base
-  has_many :user_events
-  has_many :events, through: :user_events
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+require 'spec_helper'
 
-  validates :email, uniqueness: true
-  validates_presence_of :first_name, :last_name, :email
+describe User do
+  %i(first_name last_name email password password_confirmation).each do |f|
+    it { expect(subject).to validate_presence_of f }
+  end
 
-  has_attached_file :avatar,
-                    styles: { medium: '300x300#', thumb: '150x150#' },
-                    default_url: '/images/:style/missing.png'
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  it { expect(subject).to have_many(:events).through(:user_events) }
+
+  # fix email case-sensitively uniqueness
+  # subject { FactoryGirl.build(:user) }
+  # it { expect(subject).to validate_uniqueness_of(:email) }
+
+  describe '#admin?' do
+    subject { user.admin? }
+    context 'with admin' do
+      let(:user) { build_stubbed :user, :admin }
+      it { expect(subject).to be true }
+    end
+    context 'without admin' do
+      let(:user) { build_stubbed :user, :reader }
+      it { expect(subject).to be false }
+    end
+  end
 end
