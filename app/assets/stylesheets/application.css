@@ -52,6 +52,10 @@ h2 {
   border: 0;
 }
 
+h2.show {
+  margin-top: 20px;
+}
+
 .field label, .profile {
   font-size: 20px;
   color: #444;

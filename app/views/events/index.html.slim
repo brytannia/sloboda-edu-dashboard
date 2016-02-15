@@ -1,7 +1,7 @@
-- @hash.each do |k,v|
+- @hash.each do |month,events|
   .row.month-events
-    div.month #{k}
-    - v.each do |e|
+    div.month #{month}
+    - events.each do |e|
       - if !e.confirmed && !current_user.try(:admin?)
         - next
       .event
