@@ -1,27 +1,26 @@
-h1 Sloboda Edu Dashboard
-table
-  tr
-    th Date
-    th Time
-    th Subject
-    th Speakers
-    th Place
-    - if current_user.try(:admin?)
-      th Confirmed
-  - @events.each do |e|
-    - if !e.confirmed && !current_user.try(:admin?)
-      - next
-    tr
-      td #{e.datetime.try(:strftime, '%B %d, %Y')}
-      td #{e.datetime.try(:strftime, '%H:%M')}
-      td #{e.subject}
-      td
-        - e.users.each do |s|
-          . #{s.first_name}
-          - if s.avatar?
-            = image_tag s.avatar.url(:thumb)
-      td 
-        - if e.location
-          . #{e.location.try(:name) + ', ' + e.location.try(:address)}          
-      - if current_user.try(:admin?)
-        td #{e.confirmed}
+/ - if current_user.try(:admin?)
+- @hash.each do |k,v|
+  .row.month-events
+    div.month #{k}
+    - v.each do |e|
+      - if !e.confirmed && !current_user.try(:admin?)
+        - next
+      .event
+        .row
+          - if current_user.try(:admin?) && !e.confirmed
+            .conf Not confirmed
+        .row.info
+          .small-6.columns
+            .title #{e.subject}.
+          .small-5.small-offset-1.columns.details
+            - unless e.location.nil?
+              = e.location.name + ', ' + e.location.address
+            .details #{e.datetime.try(:strftime, '%e, %A') + ' at ' + e.datetime.try(:strftime, '%H:%M')}
+        - unless Event.find(e[:id]).users == []
+          .sp Speakers
+        .row.speakers
+          - Event.find(e[:id]).users.each do |u|
+            .speaker
+              - unless u.avatar.nil?
+                = image_tag u.avatar.url(:thumb)
+              . #{u.first_name + ' ' + u.last_name}
