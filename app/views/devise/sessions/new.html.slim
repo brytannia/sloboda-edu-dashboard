@@ -1,0 +1,21 @@
+.row
+  .small-4.small-offset-4.columns.profile
+    h2
+      | Log in
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = devise_error_messages!
+      .field
+        = f.label :email
+        = f.email_field :email, autofocus: true
+      .field
+        = f.label :password
+        - if @minimum_password_length
+          em
+            | (
+            = @minimum_password_length
+            |  characters minimum)
+        = f.password_field :password, autocomplete: "off"
+      .actions
+        = f.submit "Log in", class: 'button btn'
+    = render "devise/shared/links"
+.dddd
