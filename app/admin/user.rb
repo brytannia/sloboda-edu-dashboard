@@ -10,7 +10,6 @@ ActiveAdmin.register User do
       @user.admin = params[:user][:admin] == '1' ?
         true : false
       @user.save
-      binding.pry
     end
   end
 
