@@ -24,13 +24,13 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :development, :test do
   gem 'byebug'
   gem 'pry'
   gem 'mailcatcher', '~> 0.6.1'
-  gem 'capybara'
 end
 
 group :development do
@@ -47,4 +47,3 @@ gem 'html2slim'
 gem 'activeadmin', github: 'activeadmin'
 gem 'paperclip', '~> 4.3'
 gem 'foundation-rails'
-
