@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   permit_params :subject, :datetime, :confirmed, :location_id,
                 :user_events, :users
-  before_filter :set_users, only: [:update]
+  before_filter :set_users, only: [:update, :create]
 
   controller do
     def set_users
