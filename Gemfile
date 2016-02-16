@@ -30,6 +30,7 @@ group :development, :test do
   gem 'byebug'
   gem 'pry'
   gem 'mailcatcher', '~> 0.6.1'
+  gem 'capybara'
 end
 
 group :development do
