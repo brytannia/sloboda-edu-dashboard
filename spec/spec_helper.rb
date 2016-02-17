@@ -20,6 +20,7 @@ require 'rails_helper'
 require 'capybara/rspec'
 
 RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers
   config.include FactoryGirl::Syntax::Methods
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

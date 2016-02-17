@@ -38,14 +38,34 @@ feature 'User logs in and visit pages' do
     expect(URI.parse(current_url).path).to eq user_path(id: @user[:id])
   end
 
-  def log_in_with(email, password)
-    visit user_session_path
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
-    click_button 'Log in'
+  def create(params)
+    User.create(params).save
+  end
+end
+
+feature 'Admin logs in and visit admin panel' do
+  before :each do
+    @admin = attributes_for(:user, :admin)
+    create @admin
+  end
+
+  scenario 'with valid email and password' do
+    log_in_with @admin[:email], @admin[:password]
+
+    expect(URI.parse(current_url).path).to eq root_path
+
+    visit admin_root_path
+    expect(URI.parse(current_url).path).to eq admin_root_path
   end
 
   def create(params)
     User.create(params).save
   end
+end
+
+def log_in_with(email, password)
+  visit user_session_path
+  fill_in 'Email', with: email
+  fill_in 'Password', with: password
+  click_button 'Log in'
 end
