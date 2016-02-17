@@ -13,7 +13,7 @@ feature 'User signs up' do
   end
 
   def sign_up_with(params)
-    visit '/users/sign_up'
+    visit new_user_registration_path
     fill_in 'First name', with: params[:first_name]
     fill_in 'Last name', with: params[:last_name]
     fill_in 'Email', with: params[:email]
@@ -60,6 +60,18 @@ feature 'Admin logs in and visit admin panel' do
 
   def create(params)
     User.create(params).save
+  end
+end
+
+feature 'User without access' do
+  scenario 'visit root path' do
+    visit root_path
+    expect(URI.parse(current_url).path).to eq new_user_session_path
+  end
+
+  scenario 'visit admin' do
+    visit admin_root_path
+    expect(URI.parse(current_url).path).to eq new_user_session_path
   end
 end
 
