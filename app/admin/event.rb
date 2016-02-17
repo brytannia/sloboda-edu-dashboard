@@ -3,6 +3,8 @@ ActiveAdmin.register Event do
                 :user_events, :users
   before_filter :set_users, only: [:update]
 
+  before_filter :send_email, only: [:create, :update]
+
   controller do
     def set_users
       @event = Event.find(params[:id])
@@ -10,6 +12,13 @@ ActiveAdmin.register Event do
       params[:event][:user_ids].each do |id|
         @event.users << User.find(id) unless id == ''
       end
+    end
+
+    def send_email
+      event = Event.find(params[:id])
+      # binding.pry
+      # event_time = (event.datetime.to_time - 5.seconds).to_datetime
+      UserMailer.delay(run_at: 2.seconds.from_now).notification_email(current_user, event)
     end
   end
 
