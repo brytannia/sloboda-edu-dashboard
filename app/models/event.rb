@@ -13,7 +13,11 @@ class Event < ActiveRecord::Base
   def send_email
     event = Event.find(id)
     # event_time = (event.datetime.to_time - 3.hours).to_datetime
-    UserMailer.delay(run_at: 2.seconds.from_now)
-              .notification_email(User.last, event)
+    # binding.pry
+    users = User.all
+    users.each do |u|
+      UserMailer.delay(run_at: 2.seconds.from_now)
+                .notification_email(u, event)
+    end
   end
 end

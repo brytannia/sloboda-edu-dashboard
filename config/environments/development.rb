@@ -17,8 +17,6 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -41,4 +39,20 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # configs for mailcatcher
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    user_nam: 'sl.edu.mailing@gmail.com',
+    #Figaro.env.gmail_username,
+    password: 'sloboda123',
+    #Figaro.env.gmail_password,
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 end
