@@ -1,6 +1,6 @@
 ActiveAdmin.setup do |config|
   # == Site Title
-  config.site_title = "Sloboda Edu Dashboard"
+  config.site_title = 'Sloboda Edu Dashboard'
   config.site_title_link = '/'
 
   # == Current User

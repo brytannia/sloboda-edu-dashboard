@@ -24,6 +24,7 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :development, :test do
@@ -44,6 +45,8 @@ gem 'devise'
 gem 'slim'
 gem 'html2slim'
 gem 'activeadmin', github: 'activeadmin'
+gem 'paperclip', '~> 4.3'
+gem 'foundation-rails'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'figaro'

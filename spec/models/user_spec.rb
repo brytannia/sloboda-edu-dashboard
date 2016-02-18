@@ -20,35 +20,27 @@
 #  avatar_updated_at      :datetime
 #
 
-class UsersController < ApplicationController
-  before_action :profile_access, only: [:show, :edit, :delete]
+require 'spec_helper'
 
-  def show
-    @user = User.find(params[:id])
+describe User do
+  %i(first_name last_name email password password_confirmation).each do |f|
+    it { expect(subject).to validate_presence_of f }
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
+  it { expect(subject).to have_many(:events).through(:user_events) }
 
-  def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to @user
-    else
-      render :edit
+  subject { FactoryGirl.build(:user) }
+  it { expect(subject).to validate_uniqueness_of(:email).case_insensitive }
+
+  describe '#admin?' do
+    subject { user.admin? }
+    context 'with admin' do
+      let(:user) { build_stubbed :user, :admin }
+      it { expect(subject).to be true }
     end
-  end
-
-  private
-
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :avatar)
-  end
-
-  def profile_access
-    unless current_user.id == params[:id].to_i
-      redirect_to user_path(current_user)
+    context 'without admin' do
+      let(:user) { build_stubbed :user, :reader }
+      it { expect(subject).to be false }
     end
   end
 end

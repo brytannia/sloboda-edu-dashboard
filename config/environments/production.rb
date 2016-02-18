@@ -77,8 +77,15 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.assets.precompile += ['active_admin.js', 'active_admin.css', 'active_admin/print.css']
-  config.serve_static_assets = true
+  config.assets.precompile +=
+    ['active_admin.js', 'active_admin.css', 'active_admin/print.css']
+  config.serve_static_files = true
+  config.assets.compile = true
+
+  config.assets.precompile +=
+    %w( #{Rails.root}/vendor/assets/stylesheets/active_admin.css.scss)
+  config.assets.precompile +=
+    %w( #{Rails.root}/vendor/assets/javascripts/active_admin.js.coffee)
 
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail

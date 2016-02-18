@@ -20,35 +20,21 @@
 #  avatar_updated_at      :datetime
 #
 
-class UsersController < ApplicationController
-  before_action :profile_access, only: [:show, :edit, :delete]
+FactoryGirl.define do
+  factory :user do
+    id Faker::Number.number(3)
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    password 'password'
+    password_confirmation 'password'
 
-  def show
-    @user = User.find(params[:id])
-  end
-
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to @user
-    else
-      render :edit
+    trait :admin do
+      admin true
     end
-  end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :avatar)
-  end
-
-  def profile_access
-    unless current_user.id == params[:id].to_i
-      redirect_to user_path(current_user)
+    trait :reader do
+      admin false
     end
   end
 end

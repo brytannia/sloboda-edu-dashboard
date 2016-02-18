@@ -1,0 +1,28 @@
+- @hash.each do |month,events|
+  .row.month-events
+    div.month #{month}
+    - events.each do |e|
+      - if !e.confirmed && !current_user.try(:admin?)
+        - next
+      .event
+        .row
+          - if current_user.try(:admin?)
+            .adm
+              = link_to 'Edit', edit_admin_event_path(e), class: 'button hollow'
+            - unless e.confirmed
+              .adm.conf Not confirmed
+        .row.info
+          .small-6.columns
+            .title #{e.subject}.
+          .small-5.small-offset-1.columns.details
+            - unless e.location.nil?
+              = e.location.name + ', ' + e.location.address
+            .details #{e.datetime.try(:strftime, '%e, %A') + ' at ' + e.datetime.try(:strftime, '%H:%M')}
+        - unless Event.find(e[:id]).users == []
+          .sp Speakers
+        .row.speakers
+          - Event.find(e[:id]).users.each do |u|
+            .speaker
+              - unless u.avatar.nil?
+                = image_tag u.avatar.url(:thumb)
+              . #{u.first_name + ' ' + u.last_name}

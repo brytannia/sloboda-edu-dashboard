@@ -1,0 +1,20 @@
+.row
+  .small-4.small-offset-4.columns
+    = form_for(@user) do |f|
+        br
+        h2 Edit profile
+        br
+        .field
+          = f.label :first_name
+          = f.text_field :first_name, autofocus: true      
+        .field
+          = f.label :last_name
+          = f.text_field :last_name  
+        .field
+          = f.label :email
+          = f.email_field :email
+        .field
+          = f.label :avatar
+          = f.file_field :avatar
+        .actions
+          = f.submit 'Save', class: 'button btn'

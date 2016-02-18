@@ -10,16 +10,27 @@ html
 
     = csrf_meta_tags
   body
-    = notice
-    = alert
-    .admin-nav
-      - if current_user.try(:admin?)
-        = link_to 'Admin', admin_dashboard_path
-    .user-nav
-      - if user_signed_in?
-        p Signed in as #{current_user.first_name + ' ' + current_user.last_name}
-        = link_to "Sign out", destroy_user_session_path, :method => :delete
-      - else
-        = link_to "Sign up", new_user_registration_path
-        = link_to "sign in", new_user_session_path
+    .top-bar
+      .top-bar-left
+        ul.menu
+          li.title
+            = link_to 'Sloboda EDU', root_path
+          li
+            - if current_user.try(:admin?)
+              = link_to 'Admin', admin_dashboard_path
+      .top-bar-right
+        ul.menu
+          - if user_signed_in?
+            li Signed in as #{current_user.first_name + ' ' + current_user.last_name}
+            li
+              = link_to "Profile", user_path(current_user)
+            li
+              = link_to "Sign out", destroy_user_session_path, :method => :delete
+          - else
+            li
+              = link_to "Sign up", new_user_registration_path
+            li
+              = link_to "Sign in", new_user_session_path
+    / = notice
+    / = alert
     = yield

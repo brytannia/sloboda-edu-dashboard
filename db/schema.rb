@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160217182547) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "events", force: :cascade do |t|
+    t.datetime "datetime"
     t.string   "subject"
     t.boolean  "confirmed"
     t.integer  "location_id"
