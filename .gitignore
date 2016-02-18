@@ -21,3 +21,6 @@
 
 config/database.yml
 *fuse_hidden*
+
+# Ignore application configuration
+/config/application.yml

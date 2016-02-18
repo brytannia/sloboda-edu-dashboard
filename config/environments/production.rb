@@ -79,4 +79,15 @@ Rails.application.configure do
 
   config.assets.precompile += ['active_admin.js', 'active_admin.css', 'active_admin/print.css']
   config.serve_static_assets = true
+
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    user_name: Figaro.env.gmail_username,
+    password: Figaro.env.gmail_password,
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 end
