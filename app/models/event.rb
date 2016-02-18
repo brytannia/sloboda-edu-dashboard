@@ -12,6 +12,8 @@
 #
 
 class Event < ActiveRecord::Base
+  scope :upcoming, -> { where('datetime > ?', DateTime.now) }
+
   has_many :user_events
   has_many :users, through: :user_events
   belongs_to :location
