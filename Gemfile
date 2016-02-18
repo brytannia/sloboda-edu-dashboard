@@ -24,6 +24,7 @@ group :test do
   gem 'rspec-its'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :development, :test do
@@ -46,4 +47,3 @@ gem 'html2slim'
 gem 'activeadmin', github: 'activeadmin'
 gem 'paperclip', '~> 4.3'
 gem 'foundation-rails'
-

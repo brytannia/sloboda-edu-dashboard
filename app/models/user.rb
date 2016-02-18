@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   validates :email, uniqueness: true
-  validates_presence_of :first_name, :last_name, :email
+  validates_presence_of :first_name, :last_name, :email, :password_confirmation
 
   has_attached_file :avatar,
                     styles: { medium: '300x300#', thumb: '150x150#' },
