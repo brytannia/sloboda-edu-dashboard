@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :password_confirmation
 
   has_attached_file :avatar,
-                    styles: { medium: '300x300#', thumb: '150x150#' },
+                    styles: { medium: '300x300#', thumb: '150x150#', small: '90x90#' },
                     default_url: '/images/missing.png'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 end
