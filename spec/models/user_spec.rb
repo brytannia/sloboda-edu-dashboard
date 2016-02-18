@@ -29,9 +29,8 @@ describe User do
 
   it { expect(subject).to have_many(:events).through(:user_events) }
 
-  # fix email case-sensitively uniqueness
-  # subject { FactoryGirl.build(:user) }
-  # it { expect(subject).to validate_uniqueness_of(:email) }
+  subject { FactoryGirl.build(:user) }
+  it { expect(subject).to validate_uniqueness_of(:email).case_insensitive }
 
   describe '#admin?' do
     subject { user.admin? }
