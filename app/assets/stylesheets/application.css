@@ -76,8 +76,8 @@ h2.show {
 }
 
 .event img {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
 }
 
@@ -99,7 +99,7 @@ h2.show {
 
 .speaker {
   display: flex;
-  margin: 10px 20px;
+  margin: 10px;
 }
 
 .sp {
@@ -135,7 +135,7 @@ h2.show {
 }
 
 .title {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 600;
   color: #000;
 }
