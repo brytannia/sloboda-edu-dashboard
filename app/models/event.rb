@@ -21,4 +21,17 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :users
   accepts_nested_attributes_for :user_events
   validates_presence_of :subject
+
+  after_create :send_email
+  after_update :send_email
+
+  def send_email
+    event = Event.find(id)
+    event_time = (event.datetime.to_time - 3.hours).to_datetime
+    users = User.all
+    users.each do |u|
+      UserMailer.delay(run_at: event_time)
+                .notification_email(u, event)
+    end
+  end
 end

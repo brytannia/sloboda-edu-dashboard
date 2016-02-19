@@ -22,3 +22,6 @@
 config/database.yml
 *fuse_hidden*
 avatars/*
+
+# Ignore application configuration
+/config/application.yml

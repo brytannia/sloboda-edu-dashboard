@@ -30,7 +30,7 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'pry'
-  gem 'mailcatcher', '~> 0.6.1'
+  gem 'mailcatcher'
 end
 
 group :development do
@@ -47,3 +47,6 @@ gem 'html2slim'
 gem 'activeadmin', github: 'activeadmin'
 gem 'paperclip', '~> 4.3'
 gem 'foundation-rails'
+gem 'delayed_job'
+gem 'delayed_job_active_record'
+gem 'figaro'

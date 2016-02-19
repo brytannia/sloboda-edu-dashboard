@@ -8,10 +8,13 @@ require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'sprockets/railtie'
+# require "rails/test_unit/railtie"
+
 Bundler.require(*Rails.groups)
 
 module SlobodaEduDashboard
   class Application < Rails::Application
+    config.active_job.queue_adapter = :delayed_job
     # config.time_zone = 'Central Time (US & Canada)'
 
     # config.i18n.load_path +=

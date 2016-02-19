@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    h1
+      = @event.subject
+    div
+      = "Hi, #{@user.first_name}! Do not forget that today "
+      - unless @event.datetime.nil?
+        = "at #{@event.datetime.strftime('%H:%M')} "
+      = "is going to be '#{@event.subject}'. Feel free to join!"

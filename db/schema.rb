@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211135359) do
+ActiveRecord::Schema.define(version: 20160217182547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "citext"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -31,6 +32,22 @@ ActiveRecord::Schema.define(version: 20160211135359) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "events", force: :cascade do |t|
     t.datetime "datetime"
     t.string   "subject"
@@ -38,6 +55,7 @@ ActiveRecord::Schema.define(version: 20160211135359) do
     t.integer  "location_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "datetime"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -58,7 +76,7 @@ ActiveRecord::Schema.define(version: 20160211135359) do
     t.string   "first_name",                             null: false
     t.string   "last_name",                              null: false
     t.boolean  "speaker"
-    t.string   "email",                  default: "",    null: false
+    t.citext   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
