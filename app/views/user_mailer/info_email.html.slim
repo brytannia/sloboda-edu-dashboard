@@ -7,4 +7,4 @@ html
       = @event.subject
     div
       = "Hi, #{@user.first_name}! #{@event.subject} is rescheduled. New date: "
-      = "#{@event.datetime.strftime('%m:%d:%Y at %H:%M')}."
+      = "#{@event.datetime.strftime('%B %d, %Y at %H:%M')}."
