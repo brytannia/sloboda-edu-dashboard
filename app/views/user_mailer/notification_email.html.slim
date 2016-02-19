@@ -2,11 +2,10 @@ doctype html
 html
   head
     meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
-    link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'
-  body style='font-family: "Lato"; border: 1px solid #333;; color: #333; padding: 20px;'
+  body
     h1
       = @event.subject
-    div style='font-size: 24px;'
+    div
       = "Hi, #{@user.first_name}! Do not forget that today "
       - unless @event.datetime.nil?
         = "at #{@event.datetime.strftime('%H:%M')} "
