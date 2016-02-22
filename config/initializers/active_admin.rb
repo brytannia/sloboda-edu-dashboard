@@ -17,4 +17,6 @@ ActiveAdmin.setup do |config|
   config.localize_format = :long
 
   config.authentication_method = :authenticate_admin_user!
+
+  config.register_stylesheet 'custom_inputs.css'
 end

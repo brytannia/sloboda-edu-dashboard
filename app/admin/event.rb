@@ -58,7 +58,7 @@ ActiveAdmin.register Event do
     f.inputs 'Event' do
       f.semantic_errors(*f.object.errors.keys)
       f.input :subject
-      f.input :datetime, as: :datetime_picker
+      f.input :datetime, as: :just_datetime_picker
       f.input :location
       f.input :confirmed
 

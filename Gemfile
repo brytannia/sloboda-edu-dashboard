@@ -51,3 +51,5 @@ gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'figaro'
 gem 'faker'
+gem 'just-datetime-picker'
+
