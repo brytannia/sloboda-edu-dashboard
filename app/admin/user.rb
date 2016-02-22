@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   permit_params :first_name, :last_name, :speaker, :email,
-                :password, :password_confirmation
+                :password, :password_confirmation, :admin
 
   before_filter :set_role, only: [:create, :update]
 
@@ -31,8 +31,10 @@ ActiveAdmin.register User do
       f.input :avatar
       f.input :speaker
       f.input :email
-      f.input :password
-      f.input :password_confirmation
+      if f.object.new_record?
+        f.input :password
+        f.input :password_confirmation
+      end
       f.input :admin
     end
     f.actions
