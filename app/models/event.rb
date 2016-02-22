@@ -37,7 +37,7 @@ class Event < ActiveRecord::Base
   end
 
   def send_default_email
-    if datetime.utc <= get_delay
+    if datetime.utc <= delay_time
       send_email(DateTime.now, 'instant_email')
     else
       send_email((datetime.utc.to_time - 3.hours).to_datetime,
@@ -53,7 +53,7 @@ class Event < ActiveRecord::Base
   end
 
   def send_updated_email
-    if datetime.utc <= get_delay
+    if datetime.utc <= delay_time
       send_email(DateTime.now, 'instant_email')
     else
       send_email(DateTime.now, 'info_email')
@@ -70,7 +70,7 @@ class Event < ActiveRecord::Base
 
   private
 
-  def get_delay
+  def delay_time
     3.hours.from_now
   end
 end
