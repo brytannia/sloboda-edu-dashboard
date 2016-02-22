@@ -26,16 +26,16 @@ div.top-bar {
   font-size: 18px;
 }
 
-div.top-bar, .menu li {
+div.top-bar, .menu li, footer {
   background-color: #2C3E50;
 }
 
-div.top-bar a {
+div.top-bar a, .footer-content a {
   color: #ddd;
   font-size: 1.1em;
 }
 
-div.top-bar a:hover {
+div.top-bar a:hover, .footer-content a:hover {
   color: #fff;
 }
 
@@ -161,6 +161,20 @@ h2.show {
 
 .btn {
   width: 100%;
+}
+
+footer {
+  height: 75px;
+}
+
+.footer-content {
+  color: #fff;
+  padding: 25px;
+  float: right;
+}
+
+.footer-content a {
+  font-size: 1.3em;
 }
 
 @media all and (max-width: 720px) {
