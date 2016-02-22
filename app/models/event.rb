@@ -26,7 +26,6 @@ class Event < ActiveRecord::Base
   after_create :send_default_email
   after_update :update_db, :send_updated_email
 
-  DELAY = 3.hours.from_now
   def send_email(run_at_time, email_type)
     event = Event.find(id)
     if event.try(:confirmed?)
@@ -38,7 +37,7 @@ class Event < ActiveRecord::Base
   end
 
   def send_default_email
-    if datetime.utc <= DELAY
+    if datetime.utc <= get_delay
       send_email(DateTime.now, 'instant_email')
     else
       send_email((datetime.utc.to_time - 3.hours).to_datetime,
@@ -54,7 +53,7 @@ class Event < ActiveRecord::Base
   end
 
   def send_updated_email
-    if datetime.utc <= DELAY
+    if datetime.utc <= get_delay
       send_email(DateTime.now, 'instant_email')
     else
       send_email(DateTime.now, 'info_email')
@@ -67,5 +66,11 @@ class Event < ActiveRecord::Base
     if !datetime.nil? && datetime.utc <= 15.minutes.from_now
       errors.add(:datetime, "can't be less than 15 minutes from now")
     end
+  end
+
+  private
+
+  def get_delay
+    3.hours.from_now
   end
 end
