@@ -20,18 +20,57 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :users
   accepts_nested_attributes_for :user_events
-  validates_presence_of :subject
+  validates_presence_of :subject, :datetime, :location
+  validate :datetime_no_less_than_15_mins_before_now
 
-  after_create :send_email
-  after_update :send_email
+  after_create :send_default_email
+  after_update :update_db, :send_updated_email
 
-  def send_email
+  def send_email(run_at_time, email_type)
     event = Event.find(id)
-    event_time = (event.datetime.to_time - 3.hours).to_datetime
-    users = User.all
-    users.each do |u|
-      UserMailer.delay(run_at: event_time)
-                .notification_email(u, event)
+    if event.try(:confirmed?)
+      User.all.each do |user|
+        UserMailer.delay(run_at: run_at_time)
+                  .send(email_type, user, event)
+      end
     end
+  end
+
+  def send_default_email
+    if datetime.utc <= delay_time
+      send_email(DateTime.now, 'instant_email')
+    else
+      send_email((datetime.utc.to_time - 3.hours).to_datetime,
+                 'notification_email')
+    end
+  end
+
+  def update_db
+    jobs = Delayed::Job.all
+    jobs.each do |job|
+      job.delete if job.handler.include? id.to_s
+    end
+  end
+
+  def send_updated_email
+    if datetime.utc <= delay_time
+      send_email(DateTime.now, 'instant_email')
+    else
+      send_email(DateTime.now, 'info_email')
+      send_email((datetime.utc.to_time - 3.hours).to_datetime,
+                 'notification_email')
+    end
+  end
+
+  def datetime_no_less_than_15_mins_before_now
+    if !datetime.nil? && datetime.utc <= 15.minutes.from_now
+      errors.add(:datetime, "can't be less than 15 minutes from now")
+    end
+  end
+
+  private
+
+  def delay_time
+    3.hours.from_now
   end
 end

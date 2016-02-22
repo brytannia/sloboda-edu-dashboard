@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+  body
+    h1
+      = @event.subject
+    div
+      = "Hi, #{@user.first_name}! #{@event.subject} is rescheduled. New date: "
+      = "#{@event.datetime.strftime('%B %d, %Y at %H:%M')}."

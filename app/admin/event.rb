@@ -1,15 +1,24 @@
 ActiveAdmin.register Event do
   permit_params :subject, :datetime, :confirmed, :location_id,
                 :user_events, :users
-  before_action :set_users, only: [:update, :create]
+  before_action :set_users_before_update, only: [:update]
+  after_create :set_users_after_create
 
   controller do
-    def set_users
-      @event = Event.find(params[:id])
+    def add_users_to_event(event_id)
+      @event = Event.find(event_id)
       @event.users = []
       params[:event][:user_ids].each do |id|
         @event.users << User.find(id) unless id == ''
       end
+    end
+
+    def set_users_after_create
+      add_users_to_event(id)
+    end
+
+    def set_users_before_update
+      add_users_to_event(params[:id])
     end
   end
 
@@ -36,6 +45,7 @@ ActiveAdmin.register Event do
     attributes_table do
       row :subject
       row :location
+      row :datetime
       table_for event.users.each do
         column do |user|
           link_to user.email, [:admin, user]

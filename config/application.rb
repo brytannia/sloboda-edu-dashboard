@@ -15,7 +15,7 @@ Bundler.require(*Rails.groups)
 module SlobodaEduDashboard
   class Application < Rails::Application
     config.active_job.queue_adapter = :delayed_job
-    # config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Kyiv'
 
     # config.i18n.load_path +=
     # Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

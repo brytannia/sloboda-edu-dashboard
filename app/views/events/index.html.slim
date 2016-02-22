@@ -1,9 +1,13 @@
 - @hash.each do |month,events|
   .row.month-events
-    div.month #{month}
+    div
+    - printed = false
     - events.each do |e|
       - if !e.confirmed && !current_user.try(:admin?)
         - next
+      - unless printed
+        .month #{month}
+        - printed = true
       .event
         .row
           .small-8.columns
