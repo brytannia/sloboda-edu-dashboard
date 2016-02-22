@@ -30,5 +30,5 @@
             - Event.find(e[:id]).users.each do |u|
               .speaker
                 - unless u.avatar.nil?
-                  = image_tag u.avatar.url(:small)
+                  = image_tag u.avatar.url(:thumb)
                 .username #{u.first_name + ' ' + u.last_name}
