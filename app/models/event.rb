@@ -26,7 +26,6 @@ class Event < ActiveRecord::Base
   after_create :send_default_email
   after_update :update_db, :send_updated_email
 
-
   DELAY = 3.hours.from_now
   def send_email(run_at_time, email_type)
     event = Event.find(id)
