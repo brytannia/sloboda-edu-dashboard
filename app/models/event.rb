@@ -29,7 +29,6 @@ class Event < ActiveRecord::Base
   def send_email(run_at_time, email_type)
     event = Event.find(id)
     if event.try(:confirmed?)
-      # event_time = (event.datetime.to_time - 3.hours).to_datetime
       users = User.all
       users.each do |user|
         UserMailer.delay(run_at: run_at_time)
@@ -39,25 +38,33 @@ class Event < ActiveRecord::Base
   end
 
   def send_default_email
-    datetime >= 3.hours.from_now ?
-                          send_email(2.minutes.from_now, 'notification_email')
-                          : send_email(DateTime.now, 'instant_email')
+    if datetime - 2.hours <= 3.hours.from_now + 2.hours
+      send_email(DateTime.now, 'instant_email')
+    else
+      send_email((datetime.to_time - 3.hours).to_datetime,
+                 'notification_email')
+    end
   end
 
   def update_db
+    jobs = Delayed::Job.all
+    jobs.each do |job|
+      job.delete if job.handler.include? id.to_s
+    end
   end
 
   def send_updated_email
-    if datetime >= 3.hours.from_now + 2.hours
-      send_email(DateTime.now, 'info_email')
-      send_email(2.minutes.from_now, 'notification_email')
-    elsif datetime > DateTim.from_now
+    if datetime - 2.hours <= 3.hours.from_now + 2.hours
       send_email(DateTime.now, 'instant_email')
+    else
+      send_email(DateTime.now, 'info_email')
+      send_email((datetime.to_time - 3.hours).to_datetime,
+                 'notification_email')
     end
   end
 
   def datetime_no_less_than_15_mins_before_now
-    if !datetime.nil? && datetime <= 15.minutes.from_now + 2.hours
+    if !datetime.nil? && datetime <= 15.minutes.from_now - 2.hours
       errors.add(:datetime, "can't be less than 15 minutes from now")
     end
   end
