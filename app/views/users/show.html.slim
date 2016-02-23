@@ -3,6 +3,8 @@
     = image_tag @user.avatar.url(:medium)
   .small-5.columns.profile
     h2 #{@user.first_name + ' ' + @user.last_name}
+    - if @user.try(:speaker?)
+      .speaker Speaker &#10003;
     .info
       - unless @user.title.nil?
         p #{@user.title}
