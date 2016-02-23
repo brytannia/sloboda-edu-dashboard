@@ -204,3 +204,59 @@ h2.show {
       background-color: #2C3E50;
     }
 }
+
+.main-content {
+  margin: 40px auto;
+}
+
+.main-content h1 {
+  font-size: 56px;
+}
+
+.main-content img {
+  border-radius: 50%;
+}
+
+#user_desc {
+  height: 88px;
+}
+
+.info p {
+  color: #999;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.container {
+  /*border: 1px solid #ddd;  */
+  padding: 10px;
+  color: #666;
+  font-size: 1.1em;
+}
+
+.container p, i {
+  font-style: normal;
+}
+
+i {
+  margin: auto 5px;
+}
+
+.container h3 {
+  color: #2C3E50;
+  padding: 0;
+}
+
+.info {
+  font-size: 1.1em;
+}
+
+.user-info {
+  margin-bottom: 30px;
+}
+
+.container img {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}

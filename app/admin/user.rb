@@ -21,6 +21,9 @@ ActiveAdmin.register User do
     column :speaker
     column :email
     column :admin
+    column :title
+    column :phone
+    column :work_since
     actions
   end
 
@@ -36,6 +39,10 @@ ActiveAdmin.register User do
         f.input :password_confirmation
       end
       f.input :admin
+      f.input :title
+      f.input :desc
+      f.input :phone
+      f.input :work_since, as: :datetime_picker
     end
     f.actions
   end
@@ -48,6 +55,10 @@ ActiveAdmin.register User do
       row :speaker
       row :email
       row :admin
+      row :title
+      row :phone
+      row :desc
+      row :work_since
     end
   end
 

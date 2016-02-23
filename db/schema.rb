@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217182547) do
+ActiveRecord::Schema.define(version: 20160223085644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "citext"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -55,7 +54,6 @@ ActiveRecord::Schema.define(version: 20160217182547) do
     t.integer  "location_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.datetime "datetime"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -76,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160217182547) do
     t.string   "first_name",                             null: false
     t.string   "last_name",                              null: false
     t.boolean  "speaker"
-    t.citext   "email",                  default: "",    null: false
+    t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -88,6 +86,10 @@ ActiveRecord::Schema.define(version: 20160217182547) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "phone"
+    t.string   "title"
+    t.text     "desc"
+    t.datetime "work_since"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
