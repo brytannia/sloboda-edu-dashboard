@@ -1,6 +1,7 @@
 ActiveAdmin.register User do
   permit_params :first_name, :last_name, :speaker, :email,
-                :password, :password_confirmation, :admin
+                :password, :password_confirmation, :admin,
+                :avatar, :phone, :title, :work_since, :desc
 
   before_filter :set_role, only: [:create, :update]
 
