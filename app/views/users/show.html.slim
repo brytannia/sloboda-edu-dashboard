@@ -13,7 +13,7 @@
     br
     div.container
       h4 About
-      - unless @user.desc.empty?
+      - unless @user.desc.try(:empty?) || @user.desc.nil?
         p #{@user.desc}
       - else
         p No information yet
