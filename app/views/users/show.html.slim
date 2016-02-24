@@ -1,12 +1,29 @@
-.row
-  h2.show My profile
-  .small-5.small-offset-2.columns
+.row.main-content
+  div
     = image_tag @user.avatar.url(:medium)
-  .small-5.columns.profile
-    strong Name: 
-    = @user.first_name + ' ' + @user.last_name
+  .profile
+    h2 #{@user.first_name + ' ' + @user.last_name}
+    - if @user.try(:speaker?)
+      .speaker-label Speaker
+    .info
+      - unless @user.title.nil?
+        p #{@user.title}
+      - unless @user.work_since.nil?
+        p Started working #{distance_of_time_in_words(@user.work_since, DateTime.now.utc, include_seconds: false)} ago
     br
-    strong E-mail: 
-    = @user.email
-    br
+    div.container
+      h4 About
+      - if !@user.desc.blank?
+        p #{@user.desc}
+      - else
+        p No information yet
     = link_to 'Edit profile', edit_user_path(current_user)
+  div
+    .container.info
+      h3 Contacts
+      i class="fa fa-envelope-o"
+      = @user.email
+      - unless @user.phone.blank?
+        br
+        i class="fa fa-phone"
+        = @user.phone

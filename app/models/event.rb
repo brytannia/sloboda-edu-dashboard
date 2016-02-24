@@ -24,8 +24,9 @@ class Event < ActiveRecord::Base
   validate :datetime_no_less_than_15_mins_before_now
 
   after_create :send_default_email
-  after_update :update_db, :send_updated_email
+  after_update :update_db, :send_updated_email, :request_speakers_update
 
+  # template for different types of emails
   def send_email(run_at_time, email_type)
     event = Event.find(id)
     if event.try(:confirmed?)
@@ -59,6 +60,20 @@ class Event < ActiveRecord::Base
       send_email(DateTime.now, 'info_email')
       send_email((datetime.utc.to_time - 3.hours).to_datetime,
                  'notification_email')
+    end
+  end
+
+  # creates a delayed job for adding speakers labels
+  def request_speakers_update
+    event = Event.find(id)
+    if event.try(:confirmed?)
+      delay(run_at: event.datetime).add_speaker_labels(event)
+    end
+  end
+
+  def add_speaker_labels(event)
+    event.users.each do |u|
+      u.update speaker: true
     end
   end
 

@@ -50,4 +50,4 @@ gem 'foundation-rails'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'figaro'
-gem 'faker'
+gem "font-awesome-rails"

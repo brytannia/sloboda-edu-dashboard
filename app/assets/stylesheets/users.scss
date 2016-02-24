@@ -1,3 +1,71 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.main-content {
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-content h1 {
+  font-size: 56px;
+}
+
+.main-content img {
+  border-radius: 50%;
+  height: 200px;
+}
+
+#user_desc {
+  height: 88px;
+}
+
+.info p {
+  color: #999;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.container {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.container p, i {
+  font-style: normal;
+}
+
+i {
+  margin: auto 5px;
+}
+
+.container h3 {
+  color: #2C3E50;
+  padding: 0;
+}
+
+.info {
+  font-size: 1.1em;
+}
+
+.user-info {
+  margin-bottom: 30px;
+}
+
+.profile h2, .main-content div, a {
+  padding: 0 10px;
+}
+
+h2, div.speaker-label {
+  display: inline-block;
+}
+
+div.speaker-label {
+  vertical-align: middle;
+  margin: 0;
+  margin-bottom: 20px;
+  background: #1EBC61;
+  color: #fff;
+  border-radius: 4px;
+}

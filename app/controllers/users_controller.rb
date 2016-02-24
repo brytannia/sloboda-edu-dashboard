@@ -21,7 +21,7 @@
 #
 
 class UsersController < ApplicationController
-  before_action :profile_access, only: [:show, :edit, :delete]
+  before_action :profile_access, only: [:edit, :delete]
 
   def show
     @user = User.find(params[:id])
@@ -43,11 +43,14 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :avatar)
+    params.require(:user).permit(:first_name, :last_name, :email, :avatar,
+                                 :phone, :title, :work_since, :desc)
   end
 
   def profile_access
-    unless current_user.id == params[:id].to_i
+    if current_user.nil?
+      redirect_to root_path
+    elsif current_user.id != params[:id].to_i
       redirect_to user_path(current_user)
     end
   end
