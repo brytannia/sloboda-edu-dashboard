@@ -13,7 +13,7 @@
     br
     div.container
       h4 About
-      - unless @user.desc.try(:empty?) || @user.desc.nil?
+      - if !@user.desc.blank?
         p #{@user.desc}
       - else
         p No information yet
@@ -21,9 +21,9 @@
   div
     .container.info
       h3 Contacts
-      = image_tag "mail.png"
+      i class="fa fa-envelope-o"
       = @user.email
-      - unless @user.phone.nil?
-      br
-        = image_tag "phone.png"
+      - unless @user.phone.blank?
+        br
+        i class="fa fa-phone"
         = @user.phone

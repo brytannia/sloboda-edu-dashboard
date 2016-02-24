@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  *= require foundation_and_overrides
-
+ *= require font-awesome
  */
 
 * {
@@ -197,6 +197,11 @@ h2.show {
 
 .footer-content a {
   font-size: 1.3em;
+}
+
+#error_explanation * {
+  font-size: 0.9em;
+  color: #D73C2C;
 }
 
 @media all and (max-width: 720px) {

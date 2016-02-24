@@ -26,6 +26,7 @@ class Event < ActiveRecord::Base
   after_create :send_default_email
   after_update :update_db, :send_updated_email, :request_speakers_update
 
+  # template for different types of emails
   def send_email(run_at_time, email_type)
     event = Event.find(id)
     if event.try(:confirmed?)
@@ -62,6 +63,7 @@ class Event < ActiveRecord::Base
     end
   end
 
+  # creates a delayed job for adding speakers labels
   def request_speakers_update
     event = Event.find(id)
     if event.try(:confirmed?)
