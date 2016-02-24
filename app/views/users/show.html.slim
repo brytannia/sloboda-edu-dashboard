@@ -17,7 +17,8 @@
         p #{@user.desc}
       - else
         p No information yet
-    = link_to 'Edit profile', edit_user_path(current_user)
+    - if current_user.id == params[:id].to_i
+      = link_to 'Edit profile', edit_user_path(current_user)
   div
     .container.info
       h3 Contacts
