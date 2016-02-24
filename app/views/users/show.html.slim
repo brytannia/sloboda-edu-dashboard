@@ -1,25 +1,24 @@
 .row.main-content
-  .small-3.small-offset-2.columns
+  div
     = image_tag @user.avatar.url(:medium)
-  .small-5.columns.profile
+  .profile
     h2 #{@user.first_name + ' ' + @user.last_name}
     - if @user.try(:speaker?)
-      .speaker Speaker &#10003;
+      .speaker-label Speaker
     .info
       - unless @user.title.nil?
         p #{@user.title}
       - unless @user.work_since.nil?
         p Started working #{distance_of_time_in_words(@user.work_since, DateTime.now.utc, include_seconds: false)} ago
-    = link_to 'Edit profile', edit_user_path(current_user)
-.row.user-info
-  .small-5.small-offset-1.columns
-    .container
-      h3 About
+    br
+    div.container
+      h4 About
       - unless @user.desc.empty?
         p #{@user.desc}
       - else
         p No information yet
-  .small-5.small-offset-1.columns
+    = link_to 'Edit profile', edit_user_path(current_user)
+  div
     .container.info
       h3 Contacts
       = image_tag "mail.png"
