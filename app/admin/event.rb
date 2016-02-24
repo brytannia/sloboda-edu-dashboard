@@ -2,7 +2,6 @@ ActiveAdmin.register Event do
   permit_params :subject, :datetime, :confirmed, :location_id,
                 :user_events, :users
   before_action :set_users_before_update, only: [:update]
-  after_create :set_users_after_create
 
   controller do
     def add_users_to_event(event_id)
@@ -11,10 +10,6 @@ ActiveAdmin.register Event do
       params[:event][:user_ids].each do |id|
         @event.users << User.find(id) unless id == ''
       end
-    end
-
-    def set_users_after_create
-      add_users_to_event(id)
     end
 
     def set_users_before_update

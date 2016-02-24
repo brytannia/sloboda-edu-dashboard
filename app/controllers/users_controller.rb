@@ -21,7 +21,7 @@
 #
 
 class UsersController < ApplicationController
-  before_action :profile_access, only: [:show, :edit, :delete]
+  before_action :profile_access, only: [:edit, :delete]
 
   def show
     @user = User.find(params[:id])

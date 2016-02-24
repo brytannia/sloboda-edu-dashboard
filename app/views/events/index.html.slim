@@ -31,4 +31,5 @@
               .speaker
                 - unless u.avatar.nil?
                   = image_tag u.avatar.url(:thumb)
-                .username #{u.first_name + ' ' + u.last_name}
+                .username
+                  = link_to "#{u.first_name} #{u.last_name}",  user_path(u)
