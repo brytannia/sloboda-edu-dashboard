@@ -21,6 +21,8 @@
 #
 
 class User < ActiveRecord::Base
+  include Gravtastic
+  gravtastic
   has_many :user_events
   has_many :events, through: :user_events
   devise :database_authenticatable, :registerable,
@@ -28,11 +30,6 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
   validates_presence_of :first_name, :last_name, :email
-
-  has_attached_file :avatar,
-                    styles: { medium: '300x300#', thumb: '150x150#' },
-                    default_url: '/images/missing.png'
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   # getting user friendly url
   def to_param

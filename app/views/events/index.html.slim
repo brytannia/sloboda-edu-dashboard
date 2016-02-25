@@ -29,7 +29,6 @@
           .row.speakers
             - Event.find(e[:id]).users.each do |u|
               .speaker
-                - unless u.avatar.nil?
-                  = image_tag u.avatar.url(:thumb)
+                = image_tag u.gravatar_url(default: 'mm')
                 .username
                   = link_to "#{u.first_name} #{u.last_name}",  user_path(u)
