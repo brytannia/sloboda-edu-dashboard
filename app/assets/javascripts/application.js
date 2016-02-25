@@ -15,5 +15,10 @@
 //= require foundation
 //= require turbolinks
 //= require_tree .
+//= require maskedinput
 
 $(function(){ $(document).foundation(); });
+
+$(document).ready(function() {
+	$("#user_phone").mask("(999) 999-99-99");
+});

@@ -50,4 +50,6 @@ gem 'foundation-rails'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'figaro'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+gem 'maskedinput-rails'
+
