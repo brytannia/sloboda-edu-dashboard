@@ -14,8 +14,8 @@
  *= require_self
  *= require foundation_and_overrides
  *= require font-awesome
- *= require pickadate/classic
- *= require pickadate/classic.date
+ *= require pickadate/default
+ *= require pickadate/default.date
  */
 
 * {
