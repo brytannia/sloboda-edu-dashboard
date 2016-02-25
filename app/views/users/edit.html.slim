@@ -24,7 +24,7 @@
         = f.text_field :title 
       .field
         = f.label :work_since
-        = f.date_field :work_since
+        = f.date_field :work_since, type: 'text', 'data-provide': 'datepicker'
       .field
         = f.label :desc
         = f.text_area :desc      
@@ -35,3 +35,13 @@
       .small-2.small-offset-9.columns
         .actions
           = f.submit 'Save', class: 'button btn edit-btn'
+
+javascript:
+  $('#user_work_since').pickadate({
+    labelMonthNext: 'Go to the next month',
+    labelMonthPrev: 'Go to the previous month',
+    labelMonthSelect: 'Pick a month from the dropdown',
+    labelYearSelect: 'Pick a year from the dropdown',
+    selectMonths: true,
+    selectYears: true
+  });

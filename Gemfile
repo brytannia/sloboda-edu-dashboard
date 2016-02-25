@@ -52,4 +52,4 @@ gem 'delayed_job_active_record'
 gem 'figaro'
 gem 'font-awesome-rails'
 gem 'maskedinput-rails'
-
+gem 'pickadate-rails'
