@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   permit_params :subject, :datetime, :confirmed, :location_id,
                 :user_events, :users, user_ids: []
-  before_action :add_users_to_event, only: [:update]
+  before_action :add_users_to_event, only: :update
 
   controller do
     def add_users_to_event
@@ -54,7 +54,7 @@ ActiveAdmin.register Event do
       f.input :confirmed
 
       f.input :users,
-              collection: User.all.map { |user| [user.first_name + ' ' + user.last_name, user.id] },
+              collection: User.all.map { |user| ["#{user.first_name} #{user.last_name}", user.id] },
               as: :select, multiple: true
     end
     f.actions
