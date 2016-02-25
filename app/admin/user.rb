@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
   permit_params :first_name, :last_name, :speaker, :email,
                 :password, :password_confirmation, :admin,
-                :avatar, :phone, :title, :work_since, :desc
+                :phone, :title, :work_since, :desc
 
   before_filter :set_role, only: [:create, :update]
 
@@ -32,7 +32,6 @@ ActiveAdmin.register User do
     f.inputs 'User' do
       f.input :first_name
       f.input :last_name
-      f.input :avatar
       f.input :speaker
       f.input :email
       if f.object.new_record?

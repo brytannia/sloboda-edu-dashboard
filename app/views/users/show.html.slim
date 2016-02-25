@@ -1,6 +1,6 @@
 .row.main-content
   div
-    = image_tag @user.gravatar_url
+    = image_tag @user.gravatar_url(size: 200, default: 'mm')
   .profile
     h2 #{@user.first_name + ' ' + @user.last_name}
     - if @user.try(:speaker?)
