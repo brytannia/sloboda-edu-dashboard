@@ -4,6 +4,9 @@
       | Log in
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       = devise_error_messages!
+      #error_explanation
+        - flash.each do |name, msg|
+          = content_tag :div, msg, id: "flash_#{name}"
       .field
         = f.label :email
         = f.email_field :email, autofocus: true

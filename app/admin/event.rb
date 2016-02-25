@@ -1,19 +1,15 @@
 ActiveAdmin.register Event do
   permit_params :subject, :datetime, :confirmed, :location_id,
-                :user_events, :users
-  before_action :set_users_before_update, only: [:update]
+                :user_events, :users, user_ids: []
+  before_action :add_users_to_event, only: :update
 
   controller do
-    def add_users_to_event(event_id)
-      @event = Event.find(event_id)
+    def add_users_to_event
+      @event = Event.find(params[:id])
       @event.users = []
       params[:event][:user_ids].each do |id|
         @event.users << User.find(id) unless id == ''
       end
-    end
-
-    def set_users_before_update
-      add_users_to_event(params[:id])
     end
   end
 
@@ -58,7 +54,7 @@ ActiveAdmin.register Event do
       f.input :confirmed
 
       f.input :users,
-              collection: User.all.map { |user| [user.email, user.id] },
+              collection: User.all.map { |user| ["#{user.first_name} #{user.last_name}", user.id] },
               as: :select, multiple: true
     end
     f.actions

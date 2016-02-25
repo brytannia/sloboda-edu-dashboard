@@ -16,9 +16,11 @@
 //= require turbolinks
 //= require_tree .
 //= require maskedinput
+//= require pickadate/picker
+//= require pickadate/picker.date
 
 $(function(){ $(document).foundation(); });
 
 $(document).ready(function() {
-	$("#user_phone").mask("(999) 999-99-99");
+  $("#user_phone").mask("(999) 999-99-99");
 });
