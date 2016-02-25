@@ -3,7 +3,8 @@
     br
     h2 Edit profile
     br
-    .small-4.columns
+    .small-4.small-offset-1.columns.context-area
+      h4 Basic info
       .field
         = f.label :first_name
         = f.text_field :first_name, autofocus: true      
@@ -13,22 +14,24 @@
       .field
         = f.label :email
         = f.email_field :email
-    .small-4.columns
       .field
         = f.label :phone
-        = f.telephone_field :phone      
+        = f.telephone_field :phone
+    .small-5.small-offset-1.columns.context-area
+      h4 Other
       .field
         = f.label :title
         = f.text_field :title 
       .field
         = f.label :work_since
         = f.date_field :work_since
-    .small-4.columns       
       .field
         = f.label :desc
         = f.text_area :desc      
       .field
         = f.label :avatar
         = f.file_field :avatar
-      .actions
-        = f.submit 'Save', class: 'button btn'
+    .row
+      .small-2.small-offset-9.columns
+        .actions
+          = f.submit 'Save', class: 'button btn edit-btn'

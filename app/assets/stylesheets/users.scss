@@ -14,7 +14,8 @@
 
 .main-content img {
   border-radius: 50%;
-  height: 200px;
+  min-height: 200px;
+  min-width: 200px;
 }
 
 #user_desc {

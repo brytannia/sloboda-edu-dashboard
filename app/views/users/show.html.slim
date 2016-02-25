@@ -11,13 +11,14 @@
       - unless @user.work_since.nil?
         p Started working #{distance_of_time_in_words(@user.work_since, DateTime.now.utc, include_seconds: false)} ago
     br
-    div.container
+    div.container.about
       h4 About
       - if !@user.desc.blank?
         p #{@user.desc}
       - else
         p No information yet
-    = link_to 'Edit profile', edit_user_path(current_user)
+    - if current_user.id == params[:id].to_i
+      = link_to 'Edit profile', edit_user_path(current_user)
   div
     .container.info
       h3 Contacts

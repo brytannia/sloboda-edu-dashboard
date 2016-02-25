@@ -81,3 +81,38 @@ def log_in_with(email, password)
   fill_in 'Password', with: password
   click_button 'Log in'
 end
+
+feature 'User edit its info' do
+  before :each do
+    @user = attributes_for(:user)
+    create @user
+  end
+
+  scenario 'with valid params' do
+    log_in_with @user[:email], @user[:password]
+    visit edit_user_path(@user)
+
+    title = Faker::Name.title
+    phone = Faker::PhoneNumber.phone_number
+    desc = Faker::Hacker.say_something_smart
+    fill_in 'Title', with: title
+    fill_in 'Phone', with: phone
+    fill_in 'Desc', with: desc
+    click_button 'Save'
+
+    expect(page).to have_content(title)
+    expect(page).to have_content(phone)
+    expect(page).to have_content(desc)
+  end
+
+  def create(params)
+    User.create(params).save
+  end
+end
+
+def log_in_with(email, password)
+  visit user_session_path
+  fill_in 'Email', with: email
+  fill_in 'Password', with: password
+  click_button 'Log in'
+end

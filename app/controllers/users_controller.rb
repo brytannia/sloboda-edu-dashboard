@@ -24,15 +24,15 @@ class UsersController < ApplicationController
   before_action :profile_access, only: [:edit, :delete]
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id].to_i)
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(params[:id].to_i)
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params[:id].to_i)
     if @user.update(user_params)
       redirect_to @user
     else

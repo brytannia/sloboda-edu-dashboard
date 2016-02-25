@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
   validate :datetime_no_less_than_15_mins_before_now
 
   after_create :send_default_email
-  after_update :update_db, :send_updated_email, :request_speakers_update
+  after_update :send_updated_email, :request_speakers_update
 
   # template for different types of emails
   def send_email(run_at_time, email_type)
@@ -54,12 +54,15 @@ class Event < ActiveRecord::Base
   end
 
   def send_updated_email
-    if datetime.utc <= delay_time
-      send_email(DateTime.now, 'instant_email')
-    else
-      send_email(DateTime.now, 'info_email')
-      send_email((datetime.utc.to_time - 3.hours).to_datetime,
-                 'notification_email')
+    if datetime_changed?
+      update_db
+      if datetime.utc <= delay_time
+        send_email(DateTime.now, 'instant_email')
+      else
+        send_email(DateTime.now, 'info_email')
+        send_email((datetime.utc.to_time - 3.hours).to_datetime,
+                   'notification_email')
+      end
     end
   end
 
