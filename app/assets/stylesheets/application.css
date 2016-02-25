@@ -204,6 +204,20 @@ h2.show {
   color: #D73C2C;
 }
 
+.context-area h4 {
+  color: #2C3E50;
+}
+
+.context-area {
+  background-color: #eee;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.edit-btn {
+  margin: 10px auto;
+}
+
 @media all and (max-width: 720px) {
     .top-bar ul {
       background-color: #2C3E50;

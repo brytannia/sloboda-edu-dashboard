@@ -11,7 +11,7 @@
       - unless @user.work_since.nil?
         p Started working #{distance_of_time_in_words(@user.work_since, DateTime.now.utc, include_seconds: false)} ago
     br
-    div.container
+    div.container.about
       h4 About
       - if !@user.desc.blank?
         p #{@user.desc}
