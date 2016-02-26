@@ -3,6 +3,9 @@
     = text_field_tag :search, params[:search]
     = submit_tag 'Search', name: nil, class: 'search-btn button'
   .users
+    - if @users.empty?
+      .container
+        h4 No results
     - @users.each do |u|
       .user data-id=u.id
         = link_to user_path(id: u.id.to_i) do

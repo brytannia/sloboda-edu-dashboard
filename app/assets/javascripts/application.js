@@ -19,9 +19,9 @@ $(document).ready(function() {
 
   if (current_uri == gon.current_profile) {
     text = 'My profile';
-  } if (current_uri == gon.current_users) {
+  } else if (current_uri == gon.current_users) {
     text = 'Colleagues';
-  } else if (current_uri != gon.current_profile && current_uri != gon.current_users) {
+  } else {
     text = '';
   }
 
