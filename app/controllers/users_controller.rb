@@ -24,14 +24,7 @@ class UsersController < ApplicationController
   before_action :profile_access, only: [:edit, :delete]
 
   def index
-    # binding.pry
-    if params[:key_word]
-      @key = params[:key_word]
-      @users = User.where('first_name LIKE ? OR last_name LIKE ? ',
-                          "#{@key}%", "#{@key}%")
-    else
-      @users = User.order(:last_name)
-    end
+    @users = User.search(params[:search]).order(:last_name)
   end
 
   def show
@@ -49,13 +42,6 @@ class UsersController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def search
-    @key = params[:key_word]
-    @users = User.where('first_name LIKE ? OR last_name LIKE ? ',
-                        "#{@key}%", "#{@key}%")
-    render partial: 'users', key_word: @key, users: @users
   end
 
   private
