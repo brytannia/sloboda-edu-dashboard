@@ -1,0 +1,19 @@
+.wrapper
+  = form_tag users_path, method: 'get' do
+    = text_field_tag :search, params[:search]
+    = submit_tag 'Search', name: nil, class: 'search-btn button'
+  .users
+    - @users.each do |u|
+      .user data-id=u.id
+        = link_to user_path(id: u.id.to_i) do
+          .temp
+            - if u.try(:speaker?)
+              .speaker-label
+                i class="fa fa-bullhorn"
+            = image_tag u.gravatar_url(size: 200, default: 'mm')
+          .name
+            = "#{u.first_name} #{u.last_name}"
+  javascript:
+    $(document).ready(function() {
+      markLink('Colleagues');
+    });
