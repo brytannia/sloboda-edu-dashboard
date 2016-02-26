@@ -22,7 +22,6 @@
 
 class UsersController < ApplicationController
   before_action :profile_access, only: [:edit, :delete]
-  before_action :set_vars
 
   def index
     @users = User.search(params[:search]).order(:last_name)
@@ -43,11 +42,6 @@ class UsersController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def set_vars
-    gon.current_users = users_path
-    gon.current_profile = user_path(current_user)
   end
 
   private

@@ -9,7 +9,6 @@
 //= require pickadate/picker.date
 //= require turbolinks
 
-var current_uri = document.location.pathname;
 $(function(){ $(document).foundation(); });
 
 var text;
@@ -22,7 +21,10 @@ $(document).ready(function() {
     text = 'My profile';
   } if (current_uri == gon.current_users) {
     text = 'Colleagues';
+  } else if (current_uri != gon.current_profile && current_uri != gon.current_users) {
+    text = '';
   }
+
   current_link = $('a').filter(function(index) {
     return $(this).text() === text;
   });
