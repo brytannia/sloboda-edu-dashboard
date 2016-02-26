@@ -1,6 +1,6 @@
 - @users.each do |u|
   .user data-id=u.id
-    = link_to user_path(id: u.id.to_i) do
+    = link_to user_path(u) do
       .temp
         - if u.try(:speaker?)
           .speaker-label

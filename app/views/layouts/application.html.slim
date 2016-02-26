@@ -21,7 +21,7 @@ html
       .top-bar-right
         ul.menu
           - if user_signed_in?
-            li Signed in as #{current_user.first_name + ' ' + current_user.last_name}
+            li Signed in as #{current_user.first_name} #{current_user.last_name}
             li
               = link_to "My profile", user_path(current_user)
             li
