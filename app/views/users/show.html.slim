@@ -28,3 +28,8 @@
         br
         i class="fa fa-phone"
         = @user.phone
+- if user_signed_in? && current_user.id == params[:id].to_i
+  javascript:
+    $(document).ready(function() {
+      markLink('My profile');
+    });
