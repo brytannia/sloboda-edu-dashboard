@@ -9,7 +9,7 @@
       - unless @user.title.nil?
         p #{@user.title}
       - unless @user.work_since.nil?
-        p Started working #{distance_of_time_in_words(@user.work_since, DateTime.now.utc, include_seconds: false)} ago
+        p Works here about #{distance_of_time_in_words(@user.work_since, DateTime.now.utc, include_seconds: false)}
     br
     div.container.about
       h4 About
