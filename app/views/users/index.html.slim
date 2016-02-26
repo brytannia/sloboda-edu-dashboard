@@ -3,6 +3,9 @@
     = text_field_tag :search, params[:search]
     = submit_tag 'Search', name: nil, class: 'search-btn button'
   .users
+    - if @users.empty?
+      .container
+        h4 No results
     - @users.each do |u|
       .user data-id=u.id
         = link_to user_path(id: u.id.to_i) do
@@ -13,7 +16,3 @@
             = image_tag u.gravatar_url(size: 200, default: 'mm')
           .name
             = "#{u.first_name} #{u.last_name}"
-  javascript:
-    $(document).ready(function() {
-      markLink('Colleagues');
-    });

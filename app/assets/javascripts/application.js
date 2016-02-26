@@ -11,14 +11,22 @@
 
 $(function(){ $(document).foundation(); });
 
+var text;
 $(document).ready(function() {
+  current_uri = document.location.pathname;
   $("#user_phone").mask("(999) 999-99-99");
-  $('a').removeClass('currentPage')
-});
+  $('a').removeClass('currentPage');
 
-function markLink(text) {
+  if (current_uri == gon.current_profile) {
+    text = 'My profile';
+  } else if (current_uri == gon.current_users) {
+    text = 'Colleagues';
+  } else {
+    text = '';
+  }
+
   current_link = $('a').filter(function(index) {
     return $(this).text() === text;
   });
-  current_link.addClass('currentPage')
-}
+  current_link.addClass('currentPage');
+});
