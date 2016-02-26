@@ -2,8 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
 
-  before_action :set_vars
-
   protected
 
   def configure_permitted_parameters
@@ -16,9 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_vars
-    gon.push(
-      current_users: users_path,
-      current_profile: user_path(current_user)
-    )
+    if !current_user.nil
+      gon.push(
+        current_users: users_path,
+        current_profile: user_path(current_user)
+      )
+    end
   end
 end
