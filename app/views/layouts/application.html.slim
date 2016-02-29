@@ -40,6 +40,9 @@ html
         / = alert
         = yield
       .footer
+        .provided
+          | * Avatars provided by
+          = link_to 'Gravatar', 'https://en.gravatar.com/', target: '_blank'
         .footer-content
           = link_to 'Sloboda Studio', 'http://sloboda-studio.com/'
           |  © All rights reserved

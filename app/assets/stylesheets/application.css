@@ -191,10 +191,16 @@ h2.show {
   height: 85px;
 }
 
-.footer-content {
+.footer-content, .provided {
   color: #fff;
   padding: 25px;
   float: right;
+}
+
+.provided {
+  float: left;
+  color: #ddd;
+  font-weight: 300;
 }
 
 .footer-content a {
