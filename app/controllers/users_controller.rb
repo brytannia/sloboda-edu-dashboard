@@ -25,6 +25,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.search(params[:search]).order(:last_name)
+    respond_to do |format|
+      format.html {}
+      format.js   {}
+      format.json { render json: @users }
+    end
   end
 
   def show

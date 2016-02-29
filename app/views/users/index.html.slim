@@ -1,18 +1,6 @@
 .wrapper
-  = form_tag users_path, method: 'get' do
-    = text_field_tag :search, params[:search]
+  = form_tag users_path, method: 'get', remote: true do
+    = text_field_tag :search, params[:search], onkeyup: "$('.search-btn').submit();"
     = submit_tag 'Search', name: nil, class: 'search-btn button'
   .users
-    - if @users.empty?
-      .container
-        h4 No results
-    - @users.each do |u|
-      .user data-id=u.id
-        = link_to user_path(id: u.id.to_i) do
-          .temp
-            - if u.try(:speaker?)
-              .speaker-label
-                i class="fa fa-bullhorn"
-            = image_tag u.gravatar_url(size: 200, default: 'mm')
-          .name
-            = "#{u.first_name} #{u.last_name}"
+    = render 'users'
