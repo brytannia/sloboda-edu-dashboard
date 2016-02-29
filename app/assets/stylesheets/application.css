@@ -224,6 +224,13 @@ h2.show {
   padding: 0;
 }
 
+h4.no-result {
+  color: #333;
+  font-size: 2em;
+  font-weight: 300;
+  font-family: 'Lato';
+}
+
 @media all and (max-width: 720px) {
     .top-bar ul {
       background-color: #2C3E50;
