@@ -19,7 +19,11 @@
               = link_to 'Edit', edit_admin_event_path(e), class: 'button hollow'
         .row.details
           - unless e.datetime.nil?
-            .datetime #{e.datetime.try(:strftime, '%e, %A') + ' at ' + e.datetime.try(:strftime, '%H:%M')}
+            .datetime
+              span.fa-stack.fa-3x
+                i.fa.fa-calendar-o.fa-stack-2x
+                strong.fa-stack-1x.calendar-text #{e.datetime.try(:strftime, '%e')}
+              = e.datetime.try(:strftime, '%A') + ' at ' + e.datetime.try(:strftime, '%H:%M')
           - unless e.location.nil?
             .location 
               = e.location.name + ", "

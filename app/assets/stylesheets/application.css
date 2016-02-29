@@ -143,6 +143,10 @@ h2.show {
   text-align: center;
 }
 
+.datetime span {
+  font-size: 24px;
+}
+
 .location {
   font-size: 20px;
   color: #999;
@@ -235,6 +239,18 @@ h4.no-result {
   font-size: 2em;
   font-weight: 300;
   font-family: 'Lato';
+}
+
+#flash_notice {
+  display: none;
+}
+
+.calendar-text {
+  margin: 5px;
+}
+
+.fa-stack.fa-3x {
+  margin-right: 10px;
 }
 
 @media all and (max-width: 720px) {
