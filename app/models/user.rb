@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   has_many :events, through: :user_events
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook, :google]
+         :omniauthable, :omniauth_providers => [:facebook, :google, :github]
 
   validates :email, uniqueness: true
   validates_length_of :first_name, :last_name, minimum: 2, maximum: 35, allow_blank: false
@@ -63,8 +63,11 @@ class User < ActiveRecord::Base
         user.uid = auth.uid
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
-        user.first_name = auth.info.first_name
-        user.last_name = auth.info.last_name
+        user.first_name = (auth.info.key?(:first_name) ? auth.info.first_name : auth.info.name.split[0])
+        lastname = auth.info.name.split(" ")
+        lastname.delete(user.first_name)
+        lastname = lastname.join(" ")
+        user.last_name = (auth.info.key?(:last_name) ? auth.info.last_name : lastname)
       end
     end
   end

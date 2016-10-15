@@ -5,20 +5,21 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should also create an action method in this controller like this:
   # def twitter
   # end
+  skip_before_action :verify_authenticity_token
 
   def facebook
-     generic_callback( 'facebook' )
-   end
+    generic_callback( 'facebook' )
+  end
 
-  #  def google_oauth2
-  #    generic_callback( 'google_oauth2' )
-  #  end
+  def google
+    generic_callback( 'google' )
+  end
 
-   def google
-     generic_callback( 'google' )
-   end
+  def github
+    generic_callback( 'github' )
+  end
 
-   def generic_callback( provider )
+  def generic_callback( provider )
     @user = User.from_omniauth(request.env["omniauth.auth"])
      if @user.persisted?
        sign_in_and_redirect @user, event: :authentication
