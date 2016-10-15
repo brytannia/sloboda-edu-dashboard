@@ -26,7 +26,8 @@ class User < ActiveRecord::Base
   has_many :user_events
   has_many :events, through: :user_events
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook, :google]
 
   validates :email, uniqueness: true
   validates_length_of :first_name, :last_name, minimum: 2, maximum: 35, allow_blank: false
@@ -42,6 +43,26 @@ class User < ActiveRecord::Base
       where('first_name LIKE ? OR last_name LIKE ?', "#{search}%", "#{search}%")
     else
       all
+    end
+  end
+
+  def self.from_omniauth(auth)
+    if user = User.find_by_email(auth.info.email)
+      user
+    else
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+        user.name = auth.info.name
+        user.image = auth.info.image
+        user.gender = getGender(auth.extra.raw_info.gender.to_s)
+        user.nickname = auth.extra.raw_info.username
+        user.status = true
+        user.confirmed_at = Time.now
+      end
     end
   end
 end
