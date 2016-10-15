@@ -34,7 +34,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, Figaro.env.google_client_id, Figaro.env.google_client_secret,
   {
     :name => "google",
-    :scope => "email,profile",
+    :scope => "userinfo.email, email, profile",
     :prompt => "consent",
     :image_aspect_ratio => "square",
     :image_size => 50,
