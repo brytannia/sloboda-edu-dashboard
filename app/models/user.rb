@@ -33,6 +33,13 @@ class User < ActiveRecord::Base
   validates_length_of :first_name, :last_name, minimum: 2, maximum: 35, allow_blank: false
   validates_length_of :email, minimum: 5, maximum: 35, allow_blank: false
 
+  before_validation do
+    if uid.blank?
+      self.uid = email
+      self.provider = "email"
+      self.status = true
+    end
+  end
   # getting user friendly url
   def to_param
     "#{id} #{first_name} #{last_name}".parameterize
@@ -56,12 +63,8 @@ class User < ActiveRecord::Base
         user.uid = auth.uid
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
-        user.name = auth.info.name
-        user.image = auth.info.image
-        user.gender = getGender(auth.extra.raw_info.gender.to_s)
-        user.nickname = auth.extra.raw_info.username
-        user.status = true
-        user.confirmed_at = Time.now
+        user.first_name = auth.info.first_name
+        user.last_name = auth.info.last_name
       end
     end
   end
