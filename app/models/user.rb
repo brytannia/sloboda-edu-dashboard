@@ -29,7 +29,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   validates :email, uniqueness: true
-  validates_length_of :first_name, :last_name, minimum: 2, maximum: 35, allow_blank: false
+  validates :first_name, :last_name, presence: true
+  validates :password_confirmation, presence: true, on: :create
+  validates_length_of :first_name, :last_name, minimum: 2, maximum: 35
   validates_length_of :email, minimum: 5, maximum: 35, allow_blank: false
 
   # getting user friendly url
