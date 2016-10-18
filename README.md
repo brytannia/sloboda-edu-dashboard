@@ -36,7 +36,12 @@ This repo represents [the front-page of Sloboda EDU project](https://sloboda-edu
     bundle install
   ```
 
-5. Rename existing `database.yml.sample` to `database.yml` (it stores the db configs);
+5. Create local `config/database.yml`(it stores the db configs);
+  
+  ```bash
+    cp config/database.yml.sample config/database.yml
+  ```
+
 6. Make sure that you have PosgreSQL in your machine and it's running;
 7. Create new db and run migrations:
 
