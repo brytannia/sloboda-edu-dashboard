@@ -55,3 +55,10 @@ gem 'gravtastic'
 gem 'pickadate-rails'
 gem 'jquery-turbolinks'
 gem 'gon'
+
+# Oauth base Gem, this group has facebook, google oauth gems,
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2', git: 'https://github.com/zquestz/omniauth-google-oauth2.git'
+gem 'omniauth-oauth2', '~> 1.3.1' # Don't touch that unless you don't want Google omniauth to work!

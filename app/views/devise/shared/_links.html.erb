@@ -1,0 +1,8 @@
+<span style="color:#8A8A8A;font-size:12px;">Sign in with:</span>&nbsp;&nbsp;
+<!--<ul class="login-navigation">-->
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to provider, omniauth_authorize_path(resource_name, provider)%>
+    <% end -%>
+  <% end -%>
+<!--</ul>-->

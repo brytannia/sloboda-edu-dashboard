@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'omniauth_callbacks'
+  }
 
   get 'users/search' => 'users#search'
 

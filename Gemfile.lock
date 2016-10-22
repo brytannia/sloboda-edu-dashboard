@@ -16,6 +16,16 @@ GIT
       ransack (~> 1.3)
       sass-rails
 
+GIT
+  remote: https://github.com/zquestz/omniauth-google-oauth2.git
+  revision: 4587b25d5611d6446aa8690966c38f099197dcf7
+  specs:
+    omniauth-google-oauth2 (0.4.1)
+      jwt (~> 1.5.2)
+      multi_json (~> 1.3)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -115,6 +125,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.6.1)
       i18n (~> 0.5)
+    faraday (0.9.2)
+      multipart-post (>= 1.2, < 3)
     figaro (1.1.1)
       thor (~> 0.14)
     font-awesome-rails (4.5.0.1)
@@ -136,6 +148,7 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    hashie (3.4.6)
     hpricot (0.8.6)
     html2slim (0.2.0)
       hpricot
@@ -158,6 +171,7 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
+    jwt (1.5.6)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -182,8 +196,27 @@ GEM
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    oauth2 (1.2.0)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 3)
+    omniauth (1.3.1)
+      hashie (>= 1.2, < 4)
+      rack (>= 1.0, < 3)
+    omniauth-facebook (4.0.0)
+      omniauth-oauth2 (~> 1.2)
+    omniauth-github (1.1.2)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth2 (1.3.1)
+      oauth2 (~> 1.0)
+      omniauth (~> 1.2)
     orm_adapter (0.5.0)
     parser (2.3.0.2)
       ast (~> 2.2)
@@ -356,6 +389,11 @@ DEPENDENCIES
   mailcatcher
   maskedinput-rails
   mocha
+  omniauth
+  omniauth-facebook
+  omniauth-github
+  omniauth-google-oauth2!
+  omniauth-oauth2 (~> 1.3.1)
   pg
   pickadate-rails
   pry
@@ -373,5 +411,8 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
 
+RUBY VERSION
+   ruby 2.2.3p173
+
 BUNDLED WITH
-   1.11.2
+   1.13.5

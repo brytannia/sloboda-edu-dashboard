@@ -25,6 +25,21 @@ Devise.setup do |config|
   # ==> Configuration for :recoverable
   config.reset_password_within = 6.hours
 
+  config.omniauth :facebook, Figaro.env.facebook_key, Figaro.env.facebook_secret,
+  {
+    :image_size => { :width => 400, :height => 400},
+    :info_fields => 'email,name,first_name,last_name,gender'
+  }
+
+  config.omniauth :google_oauth2, Figaro.env.google_client_id, Figaro.env.google_client_secret,
+  {
+    :name => "google",
+    :scope => "userinfo.email, email, profile",
+    :prompt => "consent",
+    :image_aspect_ratio => "square",
+    :image_size => 50,
+  }
+  config.omniauth :github, Figaro.env.github_key, Figaro.env.github_secret, scope: "user:email"
 
   config.sign_out_via = :delete
   config.secret_key = '148392097cf1a1b8e0f791dc70b3f519859bc98e94471c0d976183563eb94227dcc9ed088ad3f0e5bb7b2f392c80c0dd0fc187f2ec8ef61e2531abe84da0f07f'
