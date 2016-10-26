@@ -29,7 +29,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google, :github]
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :email, uniqueness: true
+  validates :password, :password_confirmation, presence: true, on: :create
+  validates :password, confirmation: true
   validates_length_of :first_name, :last_name, minimum: 2, maximum: 35, allow_blank: false
   validates_length_of :email, minimum: 5, maximum: 35, allow_blank: false
 

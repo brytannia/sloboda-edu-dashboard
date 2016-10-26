@@ -14,6 +14,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  admin                  :boolean          default(FALSE)
+#  coworker               :boolean          default()
 #  avatar_file_name       :string
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
