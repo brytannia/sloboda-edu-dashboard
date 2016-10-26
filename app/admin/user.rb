@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
   permit_params :first_name, :last_name, :speaker, :email,
                 :password, :password_confirmation, :admin,
-                :phone, :title, :work_since, :desc
+                :phone, :title, :work_since, :desc, :coworker
 
   before_filter :set_role, only: [:create, :update]
 
@@ -19,9 +19,10 @@ ActiveAdmin.register User do
     column :id
     column :first_name
     column :last_name
-    column :speaker
     column :email
+    column :speaker
     column :admin
+    column :coworker
     column :title
     column :phone
     column :work_since
@@ -32,13 +33,14 @@ ActiveAdmin.register User do
     f.inputs 'User' do
       f.input :first_name
       f.input :last_name
-      f.input :speaker
       f.input :email
+      f.input :speaker
       if f.object.new_record?
         f.input :password
         f.input :password_confirmation
       end
       f.input :admin
+      f.input :coworker
       f.input :title
       f.input :desc
       f.input :phone
@@ -52,9 +54,10 @@ ActiveAdmin.register User do
       row :id
       row :first_name
       row :last_name
-      row :speaker
       row :email
+      row :speaker
       row :admin
+      row :coworker
       row :title
       row :phone
       row :desc
@@ -64,4 +67,5 @@ ActiveAdmin.register User do
 
   filter :speaker, as: :check_boxes
   filter :admin, as: :check_boxes
+  filter :coworker, as: :check_boxes
 end
