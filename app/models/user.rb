@@ -41,7 +41,6 @@ class User < ActiveRecord::Base
     if uid.blank?
       self.uid = email
       self.provider = "email"
-      self.status = true
     end
   end
   # getting user friendly url
